@@ -18,22 +18,24 @@ export const SkillsSection: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
 
   const categoryIcons: Record<string, React.ReactNode> = {
-    languages: <Code2 className="w-5 h-5 text-cyan-400" />,
-    frontend: <Layout className="w-5 h-5 text-sky-400" />,
-    backend: <Server className="w-5 h-5 text-violet-400" />,
-    databases: <Database className="w-5 h-5 text-indigo-400" />,
     aiml: <BrainCircuit className="w-5 h-5 text-purple-400" />,
+    datascience: <Database className="w-5 h-5 text-sky-400" />,
+    languages: <Code2 className="w-5 h-5 text-cyan-400" />,
+    backend: <Server className="w-5 h-5 text-violet-400" />,
+    frontend: <Layout className="w-5 h-5 text-blue-400" />,
+    databases: <Database className="w-5 h-5 text-indigo-400" />,
     tools: <Terminal className="w-5 h-5 text-emerald-400" />,
   };
 
   const categories = [
     { key: 'all', label: 'All Domains' },
-    { key: 'languages', label: 'Programming' },
-    { key: 'frontend', label: 'Frontend' },
-    { key: 'backend', label: 'Backend' },
+    { key: 'aiml', label: 'AI/ML & GenAI' },
+    { key: 'datascience', label: 'Data Science & Big Data' },
+    { key: 'languages', label: 'Languages' },
+    { key: 'backend', label: 'Backend & APIs' },
+    { key: 'frontend', label: 'Web & Frontend' },
     { key: 'databases', label: 'Databases' },
-    { key: 'aiml', label: 'AI/ML & Data' },
-    { key: 'tools', label: 'DevOps & Tools' },
+    { key: 'tools', label: 'Tools & DevOps' },
   ];
 
   // Filter skills based on selected category & search query

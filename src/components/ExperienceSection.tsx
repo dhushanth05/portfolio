@@ -1,5 +1,5 @@
 import React from 'react';
-import { Briefcase, Calendar, MapPin, ChevronRight, CheckCircle2, Sparkles, Edit3 } from 'lucide-react';
+import { Briefcase, Calendar, MapPin, ChevronRight, CheckCircle2, Sparkles, Building2 } from 'lucide-react';
 import { PORTFOLIO_DATA } from '../data/portfolioData';
 
 export const ExperienceSection: React.FC = () => {
@@ -11,15 +11,15 @@ export const ExperienceSection: React.FC = () => {
         <div className="flex flex-col mb-16">
           <div className="flex items-center gap-2 mb-3">
             <span className="font-mono text-cyan-400 text-xs tracking-widest uppercase">
-              // 03. CAREER TRAJECTORY
+              // 03. INDUSTRY EXPERIENCE
             </span>
             <div className="h-[1px] w-12 bg-cyan-500/40" />
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-white tracking-tight">
-            Industry Experience & <span className="bg-clip-text text-transparent bg-gradient-to-r from-violet-400 to-cyan-400">Engineering Roles</span>
+            Professional Trajectory & <span className="bg-clip-text text-transparent bg-gradient-to-r from-violet-400 to-cyan-400">Engineering Work</span>
           </h2>
           <p className="mt-3 text-slate-400 text-base max-w-2xl font-light">
-            Hands-on work developing data science workflows, APIs, and operational machine learning services.
+            Hands-on work developing supervised machine learning models on banking datasets, distributed pipelines, and MLOps tooling.
           </p>
         </div>
 
@@ -36,14 +36,6 @@ export const ExperienceSection: React.FC = () => {
               {/* Experience Card */}
               <div className="glass-panel rounded-2xl p-6 sm:p-8 border border-white/[0.08] hover:border-cyan-500/30 transition-all duration-300">
                 
-                {/* Editable Badge Notice */}
-                {exp.isEditablePlaceholder && (
-                  <div className="mb-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-amber-500/10 border border-amber-500/20 text-[11px] font-mono text-amber-300">
-                    <Edit3 className="w-3.5 h-3.5" />
-                    <span>Editable Section: Update bullet points in src/data/portfolioData.ts with your exact accomplishments.</span>
-                  </div>
-                )}
-
                 {/* Header row */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
                   <div>
@@ -70,7 +62,7 @@ export const ExperienceSection: React.FC = () => {
                     </span>
                     {exp.status === 'Current' && (
                       <span className="px-2.5 py-1 rounded-full text-[11px] font-mono bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
-                        Active
+                        Active Intern
                       </span>
                     )}
                   </div>
@@ -84,11 +76,11 @@ export const ExperienceSection: React.FC = () => {
                 {/* Responsibilities list */}
                 <div className="space-y-2.5 mb-6">
                   <h4 className="text-xs font-mono uppercase tracking-wider text-slate-400">
-                    Key Workflows & Contributions:
+                    Core Workflows & Accomplishments:
                   </h4>
-                  <ul className="space-y-2">
+                  <ul className="space-y-2.5">
                     {exp.responsibilities.map((resp, rIdx) => (
-                      <li key={rIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300 font-light">
+                      <li key={rIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300 font-light leading-relaxed">
                         <ChevronRight className="w-4 h-4 text-cyan-400 mt-0.5 shrink-0" />
                         <span>{resp}</span>
                       </li>
@@ -98,7 +90,7 @@ export const ExperienceSection: React.FC = () => {
 
                 {/* Tech Tags */}
                 <div className="pt-4 border-t border-white/[0.06] flex flex-wrap items-center gap-2">
-                  <span className="text-xs font-mono text-slate-400 mr-2">Tech Stack:</span>
+                  <span className="text-xs font-mono text-slate-400 mr-2">Technologies & Tooling:</span>
                   {exp.technologies.map((tech) => (
                     <span
                       key={tech}

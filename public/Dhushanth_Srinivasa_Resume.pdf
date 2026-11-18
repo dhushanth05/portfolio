@@ -9,19 +9,31 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>
 endobj
 4 0 obj
-<< /Length 260 >>
+<< /Length 580 >>
 stream
 BT
-/F1 22 Tf
-50 720 Td
-(DHUSHANTH SRINIVASA - RESUME) Tj
-/F1 12 Tf
-0 -30 Td
-(B.E. Computer Science and Design | DSATM, Class of 2027) Tj
+/F1 18 Tf
+50 740 Td
+(DHUSHANTH SRINIVASA) Tj
+/F1 10 Tf
 0 -20 Td
-(Data Science & MLOps Intern at Krosum Labs) Tj
-0 -40 Td
-([Official PDF Placeholder - Replace with your resume in public/Dhushanth_Srinivasa_Resume.pdf]) Tj
+(Bangalore, Karnataka, India | +91 9964185141 | sdhushanth123@gmail.com) Tj
+0 -14 Td
+(linkedin.com/in/dhushanth-srinivasa | github.com/dhushanth05) Tj
+0 -26 Td
+(EDUCATION: Dayananda Sagar Academy of Technology and Management | B.E. CS & Design (2027) | CGPA: 8.54) Tj
+0 -20 Td
+(EXPERIENCE: Data Science & MLOps Intern @ Krosum Labs (Aug 2026 - Present)) Tj
+0 -14 Td
+(Supervised ML on banking data, scikit-learn, PySpark, Apache Airflow, Grafana) Tj
+0 -24 Td
+(PROJECTS:) Tj
+0 -14 Td
+(- PlantMind: AI Industrial Knowledge Platform (RAG, Neo4j, Redis, Gemini API, FastAPI, React)) Tj
+0 -14 Td
+(- CYNTHERA: Multi-Agent AI Framework for Drug Repurposing (FastAPI, Streamlit, Graph Algorithms)) Tj
+0 -14 Td
+(- ResumePilot AI: Full-Stack AI Resume Analyzer & Match Scoring (Next.js, FastAPI, PostgreSQL, Docker)) Tj
 ET
 endstream
 endobj
@@ -35,9 +47,9 @@ xref
 0000000058 00000 n 
 0000000115 00000 n 
 0000000224 00000 n 
-0000000537 00000 n 
+0000000857 00000 n 
 trailer
 << /Size 6 /Root 1 0 R >>
 startxref
-608
+928
 %%EOF

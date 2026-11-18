@@ -1,5 +1,5 @@
 import React from 'react';
-import { GraduationCap, Calendar, MapPin, Award, BookOpen, CheckCircle2 } from 'lucide-react';
+import { GraduationCap, Calendar, MapPin, Award, BookOpen, CheckCircle2, TrendingUp, Sparkles } from 'lucide-react';
 import { PORTFOLIO_DATA } from '../data/portfolioData';
 
 export const EducationSection: React.FC = () => {
@@ -13,20 +13,20 @@ export const EducationSection: React.FC = () => {
         <div className="flex flex-col mb-16">
           <div className="flex items-center gap-2 mb-3">
             <span className="font-mono text-cyan-400 text-xs tracking-widest uppercase">
-              // 05. ACADEMIC FOUNDATION
+              // 05. ACADEMIC EXCELLENCE
             </span>
             <div className="h-[1px] w-12 bg-cyan-500/40" />
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-white tracking-tight">
-            Education & <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-sky-300 to-violet-400">Core Foundations</span>
+            Academic Track Record & <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-sky-300 to-violet-400">Foundations</span>
           </h2>
           <p className="mt-3 text-slate-400 text-base max-w-2xl font-light">
-            Comprehensive undergraduate degree combining algorithmic engineering with interface design systems.
+            Consistent record of academic distinction in Computer Science & Design, Mathematics, and Physical Sciences.
           </p>
         </div>
 
         {/* Education Hero Card */}
-        <div className="glass-panel rounded-2xl p-6 sm:p-10 border border-white/[0.08] relative overflow-hidden">
+        <div className="glass-panel rounded-2xl p-6 sm:p-10 border border-white/[0.08] relative overflow-hidden mb-8">
           <div className="absolute top-0 right-0 w-80 h-80 bg-cyan-500/5 rounded-full blur-3xl pointer-events-none" />
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -34,24 +34,31 @@ export const EducationSection: React.FC = () => {
             {/* Left 6 cols: Degree & College Info */}
             <div className="lg:col-span-6 flex flex-col justify-between">
               <div>
-                <div className="flex items-center gap-2.5 mb-4">
-                  <span className="p-3 rounded-xl bg-cyan-950/60 border border-cyan-500/30 text-cyan-400">
-                    <GraduationCap className="w-6 h-6" />
-                  </span>
-                  <div className="flex flex-col">
-                    <span className="font-mono text-xs text-cyan-300">
-                      UNDERGRADUATE DEGREE
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-2.5">
+                    <span className="p-3 rounded-xl bg-cyan-950/60 border border-cyan-500/30 text-cyan-400">
+                      <GraduationCap className="w-6 h-6" />
                     </span>
-                    <span className="font-mono text-xs text-slate-500">
-                      {edu.period}
-                    </span>
+                    <div className="flex flex-col">
+                      <span className="font-mono text-xs text-cyan-300">
+                        UNDERGRADUATE DEGREE
+                      </span>
+                      <span className="font-mono text-xs text-slate-500">
+                        {edu.period}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="px-3 py-1 rounded-xl bg-cyan-500/10 border border-cyan-500/30 font-mono text-xs text-cyan-300 flex items-center gap-1.5">
+                    <TrendingUp className="w-3.5 h-3.5" />
+                    <span className="font-bold">CGPA: {edu.cgpa}</span>
                   </div>
                 </div>
 
-                <h3 className="text-2xl sm:text-3xl font-display font-bold text-white mb-2">
+                <h3 className="text-2xl sm:text-3xl font-display font-bold text-white mb-1">
                   {edu.degree}
                 </h3>
-                <h4 className="text-lg font-mono text-cyan-400 mb-4">
+                <h4 className="text-lg font-mono text-cyan-400 mb-3">
                   {edu.field}
                 </h4>
 
@@ -63,13 +70,17 @@ export const EducationSection: React.FC = () => {
                   <span>{edu.location}</span>
                 </div>
 
-                <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06] mb-6">
-                  <span className="text-xs font-mono text-violet-300 font-semibold uppercase block mb-1">
-                    Graduation Status
-                  </span>
-                  <p className="text-sm text-slate-300 font-light">
-                    Expected Graduation in <span className="text-white font-mono font-bold">{edu.graduationYear}</span>. Actively building technical and software engineering capabilities.
-                  </p>
+                {/* Prior Education Strip (PUC & 10th) */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+                  {edu.priorEducation.map((pEdu, idx) => (
+                    <div key={idx} className="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06]">
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="text-xs font-mono text-slate-400">{pEdu.title}</span>
+                        <span className="text-xs font-mono font-bold text-cyan-300">{pEdu.score}</span>
+                      </div>
+                      <span className="text-[11px] font-mono text-slate-500">{pEdu.board}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
 
@@ -86,11 +97,14 @@ export const EducationSection: React.FC = () => {
 
             {/* Right 6 cols: Core Coursework Matrix */}
             <div className="lg:col-span-6 glass-panel rounded-xl p-6 border border-white/[0.06] bg-[#02050f]/60">
-              <div className="flex items-center gap-2 mb-4 pb-3 border-b border-white/[0.06]">
-                <BookOpen className="w-4 h-4 text-cyan-400" />
-                <h4 className="text-sm font-mono font-semibold text-white tracking-wide">
-                  Core Engineering Coursework
-                </h4>
+              <div className="flex items-center justify-between mb-4 pb-3 border-b border-white/[0.06]">
+                <div className="flex items-center gap-2">
+                  <BookOpen className="w-4 h-4 text-cyan-400" />
+                  <h4 className="text-sm font-mono font-semibold text-white tracking-wide">
+                    Core Coursework & Specializations
+                  </h4>
+                </div>
+                <span className="text-[11px] font-mono text-cyan-400">DSATM CURRICULUM</span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -107,8 +121,8 @@ export const EducationSection: React.FC = () => {
               </div>
 
               <div className="mt-6 pt-4 border-t border-white/[0.06] flex items-center justify-between text-xs font-mono text-slate-400">
-                <span>CURRICULUM FOCUS</span>
-                <span className="text-cyan-400">ALGORITHMS + HCI</span>
+                <span>FOUNDATION: CS + INTERFACE DESIGN</span>
+                <span className="text-cyan-400">CGPA 8.54 / 10</span>
               </div>
             </div>
 

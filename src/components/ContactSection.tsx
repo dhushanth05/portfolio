@@ -8,6 +8,8 @@ import {
   Linkedin, 
   FileDown, 
   ArrowUpRight, 
+  Phone,
+  MapPin,
   Sparkles,
   MessageSquare
 } from 'lucide-react';
@@ -15,7 +17,8 @@ import confetti from 'canvas-confetti';
 import { PORTFOLIO_DATA } from '../data/portfolioData';
 
 export const ContactSection: React.FC = () => {
-  const [copied, setCopied] = useState(false);
+  const [copiedEmail, setCopiedEmail] = useState(false);
+  const [copiedPhone, setCopiedPhone] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -26,14 +29,26 @@ export const ContactSection: React.FC = () => {
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(PORTFOLIO_DATA.personal.email);
-    setCopied(true);
+    setCopiedEmail(true);
     confetti({
       particleCount: 50,
       spread: 60,
       origin: { y: 0.8 },
       colors: ['#00f0ff', '#8b5cf6', '#38bdf8']
     });
-    setTimeout(() => setCopied(false), 2500);
+    setTimeout(() => setCopiedEmail(false), 2500);
+  };
+
+  const handleCopyPhone = () => {
+    navigator.clipboard.writeText(PORTFOLIO_DATA.personal.phone);
+    setCopiedPhone(true);
+    confetti({
+      particleCount: 30,
+      spread: 50,
+      origin: { y: 0.8 },
+      colors: ['#00f0ff', '#8b5cf6', '#38bdf8']
+    });
+    setTimeout(() => setCopiedPhone(false), 2500);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -63,7 +78,7 @@ export const ContactSection: React.FC = () => {
         <div className="flex flex-col mb-16">
           <div className="flex items-center gap-2 mb-3">
             <span className="font-mono text-cyan-400 text-xs tracking-widest uppercase">
-              // 06. TRANSMISSION & INQUIRIES
+              // 07. TRANSMISSION & INQUIRIES
             </span>
             <div className="h-[1px] w-12 bg-cyan-500/40" />
           </div>
@@ -71,7 +86,7 @@ export const ContactSection: React.FC = () => {
             Let's Engineer <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-sky-300 to-violet-400">Something Great</span>
           </h2>
           <p className="mt-3 text-slate-400 text-base max-w-2xl font-light">
-            Whether exploring internship roles, full-time software engineering opportunities, or collaborative projects, I'd love to connect.
+            Looking for AI/ML engineering, full-stack development, or software engineering opportunities. Let's discuss how I can contribute.
           </p>
         </div>
 
@@ -89,13 +104,13 @@ export const ContactSection: React.FC = () => {
                   <Mail className="w-5 h-5" />
                 </div>
                 <div>
-                  <span className="font-mono text-xs text-slate-400 block">DIRECT DISPATCH</span>
+                  <span className="font-mono text-xs text-slate-400 block">PRIMARY INBOX</span>
                   <span className="text-sm font-semibold text-white">Email Address</span>
                 </div>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-black/40 border border-white/[0.06] flex items-center justify-between mb-4">
-                <span className="font-mono text-xs sm:text-sm text-cyan-300 truncate mr-2">
+              <div className="p-3.5 rounded-xl bg-black/40 border border-white/[0.06] flex items-center justify-between mb-2">
+                <span className="font-mono text-xs sm:text-sm text-cyan-300 truncate mr-2 select-all">
                   {PORTFOLIO_DATA.personal.email}
                 </span>
                 <button
@@ -104,19 +119,32 @@ export const ContactSection: React.FC = () => {
                   title="Copy email to clipboard"
                   aria-label="Copy Email"
                 >
-                  {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
+                  {copiedEmail ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
                 </button>
               </div>
 
-              <p className="text-xs text-slate-400 font-light leading-relaxed">
-                Editable email placeholder in <code className="text-cyan-300 bg-white/[0.05] px-1 rounded">src/data/portfolioData.ts</code>.
-              </p>
+              <div className="p-3.5 rounded-xl bg-black/40 border border-white/[0.06] flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <Phone className="w-4 h-4 text-cyan-400" />
+                  <span className="font-mono text-xs sm:text-sm text-slate-200 select-all">
+                    {PORTFOLIO_DATA.personal.phone}
+                  </span>
+                </div>
+                <button
+                  onClick={handleCopyPhone}
+                  className="p-2 rounded-lg bg-white/[0.06] hover:bg-cyan-500/20 text-slate-300 hover:text-cyan-300 transition-colors shrink-0"
+                  title="Copy phone number"
+                  aria-label="Copy Phone"
+                >
+                  {copiedPhone ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
+                </button>
+              </div>
             </div>
 
             {/* Social Network Links */}
             <div className="glass-panel rounded-2xl p-6 border border-white/[0.08]">
               <span className="font-mono text-xs text-slate-400 block mb-4 uppercase tracking-wider">
-                Network & Repositories
+                Professional Network & Repositories
               </span>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -184,7 +212,7 @@ export const ContactSection: React.FC = () => {
                   Send Direct Dispatch
                 </h3>
               </div>
-              <span className="font-mono text-[11px] text-cyan-400/80">CHANNEL: SECURE</span>
+              <span className="font-mono text-[11px] text-cyan-400/80">CHANNEL: ACTIVE</span>
             </div>
 
             {formSubmitted ? (
@@ -194,7 +222,7 @@ export const ContactSection: React.FC = () => {
                 </div>
                 <h4 className="text-lg font-display font-bold text-white">Transmission Received</h4>
                 <p className="text-xs sm:text-sm text-slate-300 max-w-md font-light">
-                  Thank you for reaching out, {formData.name || 'there'}! I have received your message and will reply shortly.
+                  Thank you for reaching out, {formData.name || 'there'}! I will get back to you promptly at {formData.email}.
                 </p>
               </div>
             ) : (
@@ -237,7 +265,7 @@ export const ContactSection: React.FC = () => {
                     type="text"
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                    placeholder="e.g. Software Engineering Opportunity / Collaboration"
+                    placeholder="e.g. AI/ML Engineering Role / Software Opportunity"
                     className="w-full bg-[#050b18] border border-white/[0.08] focus:border-cyan-500/50 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white placeholder:text-slate-600 outline-none transition-all"
                   />
                 </div>
@@ -251,7 +279,7 @@ export const ContactSection: React.FC = () => {
                     required
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    placeholder="Describe your project, inquiry, or opportunity..."
+                    placeholder="Describe the opportunity, engineering challenge, or project..."
                     className="w-full bg-[#050b18] border border-white/[0.08] focus:border-cyan-500/50 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white placeholder:text-slate-600 outline-none transition-all resize-none"
                   />
                 </div>

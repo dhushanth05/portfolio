@@ -15,7 +15,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
 
-      const sections = ['about', 'skills', 'experience', 'projects', 'education', 'contact'];
+      const sections = ['about', 'skills', 'experience', 'projects', 'education', 'achievements', 'contact'];
       const scrollPos = window.scrollY + 200;
 
       for (const section of sections) {
@@ -41,6 +41,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
     { name: 'Experience', href: '#experience', id: 'experience' },
     { name: 'Projects', href: '#projects', id: 'projects' },
     { name: 'Education', href: '#education', id: 'education' },
+    { name: 'Awards', href: '#achievements', id: 'achievements' },
     { name: 'Contact', href: '#contact', id: 'contact' },
   ];
 
@@ -48,7 +49,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'py-3.5 bg-[#030712]/80 backdrop-blur-md border-b border-white/[0.08] shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)]'
+          ? 'py-3 bg-[#030712]/85 backdrop-blur-md border-b border-white/[0.08] shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)]'
           : 'py-5 bg-transparent'
       }`}
     >
@@ -58,9 +59,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
           href="#"
           className="group flex items-center gap-2.5 font-display text-lg font-bold tracking-tight text-white transition-all"
         >
-          <div className="relative w-8 h-8 rounded-lg bg-gradient-to-tr from-cyan-500/20 via-violet-500/20 to-blue-500/20 border border-cyan-500/40 flex items-center justify-center overflow-hidden group-hover:border-cyan-400 transition-colors">
-            <span className="text-cyan-400 font-mono text-sm font-semibold tracking-tighter">DS</span>
-            <div className="absolute inset-0 bg-cyan-400/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+          <div className="relative w-8 h-8 rounded-lg overflow-hidden border border-cyan-500/40 flex items-center justify-center bg-cyan-950/40 group-hover:border-cyan-400 transition-colors">
+            <img
+              src={PORTFOLIO_DATA.personal.profileImage}
+              alt="DS"
+              className="w-full h-full object-cover object-top"
+            />
           </div>
           <div className="flex flex-col">
             <span className="text-sm sm:text-base font-semibold tracking-wide text-slate-100 group-hover:text-cyan-300 transition-colors">
@@ -73,14 +77,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
         </a>
 
         {/* Desktop Nav Links */}
-        <nav className="hidden lg:flex items-center gap-1 glass-pill px-4 py-1.5 rounded-full border border-white/[0.07]">
+        <nav className="hidden lg:flex items-center gap-0.5 glass-pill px-3 py-1.5 rounded-full border border-white/[0.07]">
           {navLinks.map((link, index) => {
             const isActive = activeSection === link.id;
             return (
               <a
                 key={link.id}
                 href={link.href}
-                className={`relative px-3.5 py-1.5 text-xs font-mono tracking-wide rounded-full transition-all duration-200 ${
+                className={`relative px-3 py-1 text-xs font-mono tracking-wide rounded-full transition-all duration-200 ${
                   isActive
                     ? 'text-cyan-300 bg-white/[0.08] shadow-[0_0_12px_rgba(56,189,248,0.2)]'
                     : 'text-slate-400 hover:text-slate-100 hover:bg-white/[0.04]'

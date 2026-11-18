@@ -7,6 +7,7 @@ import {
   Briefcase, 
   FolderGit2, 
   GraduationCap, 
+  Trophy,
   Mail, 
   FileDown, 
   ExternalLink, 
@@ -32,8 +33,6 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
         e.preventDefault();
         if (isOpen) {
           onClose();
-        } else {
-          // Open triggered by parent or handled here
         }
       }
       if (e.key === 'Escape' && isOpen) {
@@ -80,7 +79,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
     },
     {
       id: 'sec-projects',
-      title: 'Navigate to Featured Projects',
+      title: 'Navigate to Featured Projects (PlantMind, CYNTHERA, ResumePilot)',
       category: 'Navigation',
       icon: <FolderGit2 className="w-4 h-4 text-indigo-400" />,
       perform: () => {
@@ -90,11 +89,21 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
     },
     {
       id: 'sec-edu',
-      title: 'Navigate to Education (DSATM)',
+      title: 'Navigate to Education (DSATM, CGPA: 8.54)',
       category: 'Navigation',
       icon: <GraduationCap className="w-4 h-4 text-emerald-400" />,
       perform: () => {
         document.getElementById('education')?.scrollIntoView({ behavior: 'smooth' });
+        onClose();
+      }
+    },
+    {
+      id: 'sec-achieve',
+      title: 'Navigate to Awards & Hackathons (SBI, ET AI)',
+      category: 'Navigation',
+      icon: <Trophy className="w-4 h-4 text-amber-400" />,
+      perform: () => {
+        document.getElementById('achievements')?.scrollIntoView({ behavior: 'smooth' });
         onClose();
       }
     },
@@ -138,7 +147,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
     },
     {
       id: 'act-github',
-      title: 'Open GitHub Profile',
+      title: 'Open GitHub Profile (@dhushanth05)',
       category: 'External',
       icon: <ExternalLink className="w-4 h-4 text-cyan-400" />,
       perform: () => {

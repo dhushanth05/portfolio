@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowDown, Sparkles, FileDown, ArrowUpRight, ShieldCheck, Terminal } from 'lucide-react';
+import { ArrowDown, Sparkles, FileDown, ArrowUpRight, ShieldCheck, Terminal, MapPin, Award } from 'lucide-react';
 import { PORTFOLIO_DATA } from '../data/portfolioData';
 import { ThreeCanvas } from './ThreeCanvas';
 
@@ -13,18 +13,35 @@ export const HeroSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           
-          {/* Left Column: Headline, Bio & CTAs */}
+          {/* Left Column: Profile Avatar, Headline, Bio & CTAs */}
           <div className="lg:col-span-7 flex flex-col justify-center">
             
-            {/* System Status Pill */}
-            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full glass-pill border border-cyan-500/30 w-fit mb-6 shadow-[0_0_20px_-3px_rgba(0,240,255,0.2)]">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
-              </span>
-              <span className="text-xs font-mono font-medium tracking-wide text-cyan-300">
-                SYSTEM ONLINE // {PORTFOLIO_DATA.personal.statusBadge}
-              </span>
+            {/* Top Identity Tag with Profile Picture */}
+            <div className="flex flex-wrap items-center gap-3 mb-6">
+              {/* Profile Avatar with Neon Glow Ring */}
+              <div className="relative group">
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 via-sky-500 to-violet-600 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
+                <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-2xl overflow-hidden border-2 border-cyan-400/80 bg-[#030712] shadow-[0_0_20px_rgba(0,240,255,0.4)]">
+                  <img
+                    src={PORTFOLIO_DATA.personal.profileImage}
+                    alt={PORTFOLIO_DATA.personal.name}
+                    className="w-full h-full object-cover object-top filter contrast-105 group-hover:scale-110 transition-transform duration-300"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#030712]/40 via-transparent to-transparent pointer-events-none" />
+                </div>
+                {/* Active Indicator dot */}
+                <span className="absolute -bottom-1 -right-1 flex h-3.5 w-3.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500 border-2 border-[#030712]"></span>
+                </span>
+              </div>
+
+              {/* Status Pill */}
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-pill border border-cyan-500/30 shadow-[0_0_20px_-3px_rgba(0,240,255,0.2)]">
+                <span className="text-xs font-mono font-medium tracking-wide text-cyan-300">
+                  {PORTFOLIO_DATA.personal.statusBadge}
+                </span>
+              </div>
             </div>
 
             {/* Main Name Heading */}
@@ -42,25 +59,24 @@ export const HeroSection: React.FC = () => {
 
             {/* Subtitle */}
             <div className="flex flex-wrap items-center gap-2 text-sm sm:text-base md:text-lg font-mono text-cyan-300/90 mb-6">
-              <span className="text-white font-medium">Software Engineer</span>
+              <span className="text-white font-medium">AI/ML Engineer</span>
               <span className="text-slate-600">//</span>
               <span className="text-violet-300 font-medium">Full-Stack Developer</span>
               <span className="text-slate-600">//</span>
-              <span className="text-sky-300 font-medium">AI/ML & MLOps</span>
+              <span className="text-sky-300 font-medium">Data Science & MLOps Intern</span>
             </div>
 
             {/* Introduction paragraph */}
             <p className="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl mb-8 font-light">
-              B.E. Computer Science and Design undergraduate at{' '}
+              B.E. Computer Science & Design undergraduate at{' '}
               <span className="text-white font-normal underline decoration-cyan-500/40 underline-offset-4">
                 DSATM
               </span>{' '}
-              and Data Science & MLOps Intern at{' '}
+              (CGPA: 8.54) and Data Science & MLOps Intern at{' '}
               <span className="text-white font-normal underline decoration-violet-500/40 underline-offset-4">
                 Krosum Labs
               </span>
-              . Architecting robust backend systems, distributed AI data pipelines, and responsive
-              digital software solutions.
+              . Engineering LLM-powered applications, multi-agent frameworks (CYNTHERA), RAG platforms (PlantMind), and scalable cloud microservices.
             </p>
 
             {/* Action Buttons */}
@@ -69,7 +85,7 @@ export const HeroSection: React.FC = () => {
                 href="#projects"
                 className="group relative inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl font-mono text-sm font-semibold text-white bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 transition-all duration-300 shadow-[0_0_25px_-5px_rgba(0,240,255,0.4)] hover:shadow-[0_0_35px_-2px_rgba(0,240,255,0.6)] transform hover:-translate-y-0.5"
               >
-                <span>Explore My Work</span>
+                <span>Explore My Projects</span>
                 <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
 
@@ -111,7 +127,7 @@ export const HeroSection: React.FC = () => {
                   <span className="w-2.5 h-2.5 rounded-full bg-red-500/70" />
                   <span className="w-2.5 h-2.5 rounded-full bg-amber-500/70" />
                   <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/70" />
-                  <span className="ml-2 text-[11px] text-slate-400">dev_space_core.obj</span>
+                  <span className="ml-2 text-[11px] text-slate-400">neural_quantum_core.obj</span>
                 </div>
                 <span className="text-cyan-400/80 text-[10px] tracking-wider">THREE.JS // WEBGL</span>
               </div>
@@ -129,7 +145,7 @@ export const HeroSection: React.FC = () => {
             href="#about"
             className="group flex flex-col items-center gap-2 text-xs font-mono text-slate-500 hover:text-cyan-400 transition-colors"
           >
-            <span className="tracking-widest uppercase text-[11px]">Scroll to Initialize</span>
+            <span className="tracking-widest uppercase text-[11px]">Scroll to Explore</span>
             <div className="w-5 h-9 rounded-full border border-slate-700 group-hover:border-cyan-400/60 p-1 flex justify-center transition-colors">
               <div className="w-1.5 h-2 rounded-full bg-cyan-400 animate-bounce" />
             </div>
