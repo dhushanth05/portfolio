@@ -9,29 +9,45 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('hero');
+  const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
 
+      // Hero section view
+      if (window.scrollY < 250) {
+        setActiveSection('');
+        return;
+      }
+
+      // Check if near bottom of page -> contact
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 80) {
+        setActiveSection('contact');
+        return;
+      }
+
       const sections = ['about', 'skills', 'experience', 'projects', 'education', 'achievements', 'contact'];
-      const scrollPos = window.scrollY + 200;
+      let current = '';
 
       for (const section of sections) {
         const el = document.getElementById(section);
         if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPos >= top && scrollPos < top + height) {
-            setActiveSection(section);
-            break;
+          const rect = el.getBoundingClientRect();
+          // If the section top is above 45% of the viewport and bottom is still visible
+          if (rect.top <= window.innerHeight * 0.45 && rect.bottom >= 100) {
+            current = section;
           }
         }
       }
+
+      if (current) {
+        setActiveSection(current);
+      }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // Run on mount
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -63,6 +79,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
               <a
                 key={link.id}
                 href={link.href}
+                onClick={() => setActiveSection(link.id)}
                 className={`relative px-4 py-1.5 text-xs font-mono tracking-wide rounded-full transition-all duration-200 ${
                   isActive
                     ? 'text-cyan-300 bg-white/[0.08] shadow-[0_0_12px_rgba(56,189,248,0.2)]'
