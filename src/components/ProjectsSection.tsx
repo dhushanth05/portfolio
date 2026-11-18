@@ -42,12 +42,6 @@ export const ProjectsSection: React.FC = () => {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div>
-            <div className="flex items-center gap-2 mb-3">
-              <span className="font-mono text-cyan-400 text-xs tracking-widest uppercase">
-                // FEATURED CODEBASE & REPOSITORIES
-              </span>
-              <div className="h-[1px] w-12 bg-cyan-500/40" />
-            </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-white tracking-tight">
               Featured <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-sky-300 to-violet-400">Engineering Projects</span>
             </h2>
@@ -103,7 +97,7 @@ export const ProjectsSection: React.FC = () => {
                 {/* Blueprint Graphic Abstract */}
                 <div className="relative z-10 flex items-end justify-between">
                   <div className="font-mono text-xs text-slate-500">
-                    <span className="text-cyan-400/70 block">// SYSTEM_ID</span>
+                    <span className="text-cyan-400/70 block">SYSTEM_ID</span>
                     <span className="text-slate-300 font-bold tracking-wider">{project.id.toUpperCase()}</span>
                   </div>
                   <div className="w-11 h-11 rounded-xl bg-white/[0.03] border border-white/[0.08] flex items-center justify-center group-hover:scale-110 group-hover:border-cyan-400/50 transition-all">

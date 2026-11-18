@@ -11,12 +11,6 @@ export const EducationSection: React.FC = () => {
         
         {/* Section Header */}
         <div className="flex flex-col mb-16">
-          <div className="flex items-center gap-2 mb-3">
-            <span className="font-mono text-cyan-400 text-xs tracking-widest uppercase">
-              // ACADEMIC EXCELLENCE
-            </span>
-            <div className="h-[1px] w-12 bg-cyan-500/40" />
-          </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-white tracking-tight">
             Academic Track Record & <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-sky-300 to-violet-400">Foundations</span>
           </h2>

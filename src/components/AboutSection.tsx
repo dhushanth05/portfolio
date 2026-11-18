@@ -13,12 +13,6 @@ export const AboutSection: React.FC = () => {
         
         {/* Section Header */}
         <div className="flex flex-col mb-10">
-          <div className="flex items-center gap-2 mb-2">
-            <span className="font-mono text-cyan-400 text-xs tracking-widest uppercase">
-              // ARCHITECTURE & ORIGIN
-            </span>
-            <div className="h-[1px] w-12 bg-cyan-500/40" />
-          </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-white tracking-tight">
             Engineering Systems with <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-violet-400">Design Precision</span>
           </h2>
@@ -39,7 +33,7 @@ export const AboutSection: React.FC = () => {
                 <span className="font-mono text-xs text-cyan-400 px-3 py-1 rounded-full glass-pill border border-cyan-500/30">
                   DEVELOPER BIOGRAPHY
                 </span>
-                <span className="font-mono text-xs text-slate-500">DSATM // CGPA 8.54</span>
+                <span className="font-mono text-xs text-slate-500">DSATM • CGPA 8.54</span>
               </div>
 
               {/* Mini Bio Header with Photo */}
