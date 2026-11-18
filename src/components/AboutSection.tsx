@@ -76,7 +76,7 @@ export const AboutSection: React.FC = () => {
         <div className="flex flex-col mb-16">
           <div className="flex items-center gap-2 mb-3">
             <span className="font-mono text-cyan-400 text-xs tracking-widest uppercase">
-              // 01. ARCHITECTURE & ORIGIN
+              // ARCHITECTURE & ORIGIN
             </span>
             <div className="h-[1px] w-12 bg-cyan-500/40" />
           </div>

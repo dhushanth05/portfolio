@@ -66,7 +66,7 @@ export const SkillsSection: React.FC = () => {
           <div>
             <div className="flex items-center gap-2 mb-3">
               <span className="font-mono text-cyan-400 text-xs tracking-widest uppercase">
-                // 02. TECHNICAL MATRIX
+                // TECHNICAL MATRIX
               </span>
               <div className="h-[1px] w-12 bg-cyan-500/40" />
             </div>
