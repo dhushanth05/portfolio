@@ -1,7 +1,7 @@
 import React from 'react';
 import { ArrowDown, Sparkles, FileDown, ArrowUpRight, ShieldCheck, Terminal, MapPin, Award } from 'lucide-react';
 import { PORTFOLIO_DATA } from '../data/portfolioData';
-import { ThreeCanvas } from './ThreeCanvas';
+import { DeveloperTerminalCard } from './DeveloperTerminalCard';
 
 export const HeroSection: React.FC = () => {
   return (
@@ -59,11 +59,11 @@ export const HeroSection: React.FC = () => {
 
             {/* Subtitle */}
             <div className="flex flex-wrap items-center gap-2 text-sm sm:text-base md:text-lg font-mono text-cyan-300/90 mb-6">
-              <span className="text-white font-medium">AI/ML Engineer</span>
+              <span className="text-white font-medium">Software Developer</span>
               <span className="text-slate-600">//</span>
-              <span className="text-violet-300 font-medium">Full-Stack Developer</span>
+              <span className="text-violet-300 font-medium">AI/ML & MLOps</span>
               <span className="text-slate-600">//</span>
-              <span className="text-sky-300 font-medium">Data Science & MLOps Intern</span>
+              <span className="text-sky-300 font-medium">Full-Stack & Cloud</span>
             </div>
 
             {/* Introduction paragraph */}
@@ -115,26 +115,9 @@ export const HeroSection: React.FC = () => {
 
           </div>
 
-          {/* Right Column: Interactive 3D Visual Element */}
+          {/* Right Column: Clean Developer Terminal Card */}
           <div className="lg:col-span-5 relative flex items-center justify-center">
-            {/* Ambient Background Aura behind 3D element */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/20 via-violet-600/20 to-transparent rounded-full blur-[90px] pointer-events-none" />
-
-            <div className="relative w-full glass-panel rounded-2xl p-2 sm:p-4 border border-cyan-500/20 shadow-[0_0_50px_-10px_rgba(0,240,255,0.15)]">
-              {/* Decorative top bar */}
-              <div className="flex items-center justify-between px-3 py-2 border-b border-white/[0.06] mb-2 font-mono text-xs text-slate-400">
-                <div className="flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-red-500/70" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-amber-500/70" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/70" />
-                  <span className="ml-2 text-[11px] text-slate-400">neural_quantum_core.obj</span>
-                </div>
-                <span className="text-cyan-400/80 text-[10px] tracking-wider">THREE.JS // WEBGL</span>
-              </div>
-
-              {/* Three.js Interactive Element */}
-              <ThreeCanvas />
-            </div>
+            <DeveloperTerminalCard />
           </div>
 
         </div>
