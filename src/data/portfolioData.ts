@@ -75,7 +75,7 @@ export const PORTFOLIO_DATA = {
     stats: [
       { label: "Graduation", value: "2027" },
       { label: "Current CGPA", value: "8.54" },
-      { label: "Core Focus", value: "AI/ML & MLOps" },
+      { label: "Intern", value: "AI/ML & MLOps" },
       { label: "Location", value: "Bengaluru, IN" },
     ]
   },
