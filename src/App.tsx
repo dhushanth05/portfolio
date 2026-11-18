@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { BackgroundEffect } from './components/BackgroundEffect';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
@@ -12,12 +12,59 @@ import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { CommandPalette } from './components/CommandPalette';
 
+/** Wrapper that reveals a section when it enters the viewport */
+const RevealSection: React.FC<{ children: React.ReactNode; className?: string }> = ({
+  children,
+  className = '',
+}) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [revealed, setRevealed] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setRevealed(true);
+          observer.unobserve(el);
+        }
+      },
+      { threshold: 0.08 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className={`reveal-section ${revealed ? 'revealed' : ''} ${className}`}
+    >
+      {children}
+    </div>
+  );
+};
+
 export function App() {
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
 
+  /* Keyboard shortcut to open command palette */
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        setCommandPaletteOpen((prev) => !prev);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   return (
     <div className="relative min-h-screen bg-[#030712] text-slate-100 selection:bg-cyan-500/30 selection:text-cyan-200">
-      {/* Dynamic Cyber / Particle Background */}
+      {/* Dynamic Cyber / Particle Background — behind everything */}
       <BackgroundEffect />
 
       {/* Navigation Bar */}
@@ -25,14 +72,36 @@ export function App() {
 
       {/* Main Content Layout */}
       <main className="relative z-10 flex flex-col">
+        {/* Hero has its own parallax system — no wrapper needed */}
         <HeroSection />
-        <AboutSection />
-        <SkillsSection />
-        <ExperienceSection />
-        <ProjectsSection />
-        <EducationSection />
-        <AchievementsSection />
-        <ContactSection />
+
+        <RevealSection>
+          <AboutSection />
+        </RevealSection>
+
+        <RevealSection>
+          <SkillsSection />
+        </RevealSection>
+
+        <RevealSection>
+          <ExperienceSection />
+        </RevealSection>
+
+        <RevealSection>
+          <ProjectsSection />
+        </RevealSection>
+
+        <RevealSection>
+          <EducationSection />
+        </RevealSection>
+
+        <RevealSection>
+          <AchievementsSection />
+        </RevealSection>
+
+        <RevealSection>
+          <ContactSection />
+        </RevealSection>
       </main>
 
       {/* Professional Footer */}

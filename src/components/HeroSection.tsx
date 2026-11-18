@@ -1,138 +1,255 @@
-import React from 'react';
-import { ArrowDown, Sparkles, FileDown, ArrowUpRight, ShieldCheck, Terminal, MapPin, Award } from 'lucide-react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { ArrowUpRight, FileDown } from 'lucide-react';
 import { PORTFOLIO_DATA } from '../data/portfolioData';
-import { DeveloperTerminalCard } from './DeveloperTerminalCard';
 
 export const HeroSection: React.FC = () => {
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrollY(window.scrollY);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Parallax calculations — different layers move at different speeds
+  const imageOpacity = Math.max(0, 1 - scrollY / 700);
+  const imageTranslateY = scrollY * 0.18;
+  const imageScale = 1 + scrollY * 0.00025;
+  const glowTranslateY = scrollY * 0.08;
+  const shardTranslateY = scrollY * 0.12;
+  const textTranslateY = scrollY * 0.04;
+
   return (
     <section
       id="hero"
-      aria-label="Dhushanth Srinivasa Hero Section"
-      className="relative min-h-screen pt-28 pb-16 lg:pt-32 lg:pb-24 flex flex-col justify-center overflow-hidden"
+      aria-label="Dhushanth Srinivasa — Developer Portfolio Hero"
+      className="relative min-h-screen overflow-hidden bg-[#030712]"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          
-          {/* Left Column: Profile Avatar, Headline, Bio & CTAs */}
-          <div className="lg:col-span-7 flex flex-col justify-center">
-            
-            {/* Top Identity Tag with Profile Picture */}
-            <div className="flex flex-wrap items-center gap-3 mb-6">
-              {/* Profile Avatar with Neon Glow Ring */}
-              <div className="relative group">
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 via-sky-500 to-violet-600 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
-                <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-2xl overflow-hidden border-2 border-cyan-400/80 bg-[#030712] shadow-[0_0_20px_rgba(0,240,255,0.4)]">
-                  <img
-                    src={PORTFOLIO_DATA.personal.profileImage}
-                    alt={PORTFOLIO_DATA.personal.name}
-                    className="w-full h-full object-cover object-top filter contrast-105 group-hover:scale-110 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#030712]/40 via-transparent to-transparent pointer-events-none" />
-                </div>
-                {/* Active Indicator dot */}
-                <span className="absolute -bottom-1 -right-1 flex h-3.5 w-3.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500 border-2 border-[#030712]"></span>
-                </span>
-              </div>
+      {/* ═══════════════════════════════════════════════════════════
+          PARALLAX LAYER 0 — Ambient Glow Orbs (slowest layer)
+          ═══════════════════════════════════════════════════════════ */}
+      <div
+        className="absolute inset-0 pointer-events-none will-change-transform"
+        style={{ transform: `translateY(${glowTranslateY}px)` }}
+      >
+        {/* Primary cyan glow behind image area */}
+        <div className="absolute top-[10%] right-[5%] w-[600px] h-[600px] rounded-full bg-cyan-500/[0.12] blur-[140px]" />
+        {/* Secondary violet glow lower-left of image */}
+        <div className="absolute top-[40%] right-[15%] w-[500px] h-[500px] rounded-full bg-violet-600/[0.1] blur-[130px]" />
+        {/* Tertiary blue glow at top */}
+        <div className="absolute top-[-5%] right-[25%] w-[400px] h-[400px] rounded-full bg-sky-500/[0.08] blur-[120px]" />
+        {/* Warm accent glow at center-right */}
+        <div className="absolute top-[25%] right-[-5%] w-[350px] h-[350px] rounded-full bg-indigo-500/[0.07] blur-[100px]" />
+      </div>
 
-              {/* Status Pill */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-pill border border-cyan-500/30 shadow-[0_0_20px_-3px_rgba(0,240,255,0.2)]">
-                <span className="text-xs font-mono font-medium tracking-wide text-cyan-300">
-                  {PORTFOLIO_DATA.personal.statusBadge}
-                </span>
-              </div>
+      {/* ═══════════════════════════════════════════════════════════
+          PARALLAX LAYER 1 — Profile Image (medium speed)
+          ═══════════════════════════════════════════════════════════ */}
+      <div
+        className="absolute top-0 right-0 h-full w-[90%] sm:w-[70%] lg:w-[55%] will-change-transform"
+        style={{
+          transform: `translateY(${imageTranslateY}px) scale(${imageScale})`,
+          opacity: imageOpacity,
+        }}
+      >
+        {/* The actual profile image */}
+        <img
+          src={PORTFOLIO_DATA.personal.profileImage}
+          alt="Dhushanth Srinivasa"
+          className="w-full h-full object-cover object-top select-none"
+          style={{
+            maskImage:
+              'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.3) 15%, rgba(0,0,0,0.9) 40%, black 60%), linear-gradient(to top, transparent 0%, rgba(0,0,0,0.5) 12%, black 30%)',
+            WebkitMaskImage:
+              'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.3) 15%, rgba(0,0,0,0.9) 40%, black 60%), linear-gradient(to top, transparent 0%, rgba(0,0,0,0.5) 12%, black 30%)',
+            maskComposite: 'intersect',
+            WebkitMaskComposite: 'destination-in',
+            filter: 'contrast(1.1) brightness(0.85)',
+          }}
+          draggable={false}
+        />
+
+        {/* Color overlay tint — blends the image into our palette */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#030712]/70 via-cyan-950/20 to-violet-950/30 mix-blend-multiply pointer-events-none" />
+
+        {/* Bottom edge fade to background */}
+        <div className="absolute inset-x-0 bottom-0 h-[30%] bg-gradient-to-t from-[#030712] via-[#030712]/80 to-transparent pointer-events-none" />
+
+        {/* Left edge fade to background */}
+        <div className="absolute inset-y-0 left-0 w-[40%] bg-gradient-to-r from-[#030712] via-[#030712]/60 to-transparent pointer-events-none" />
+
+        {/* Top subtle vignette */}
+        <div className="absolute inset-x-0 top-0 h-[15%] bg-gradient-to-b from-[#030712]/50 to-transparent pointer-events-none" />
+      </div>
+
+      {/* ═══════════════════════════════════════════════════════════
+          PARALLAX LAYER 2 — Glass Shard Panels & Lines (medium-fast)
+          ═══════════════════════════════════════════════════════════ */}
+      <div
+        className="absolute inset-0 pointer-events-none will-change-transform hidden sm:block"
+        style={{
+          transform: `translateY(${shardTranslateY}px)`,
+          opacity: imageOpacity,
+        }}
+      >
+        {/* Glass Shard Panel 1 — upper diagonal */}
+        <div
+          className="absolute top-[8%] right-[5%] w-[380px] h-[260px] origin-center"
+          style={{ transform: 'rotate(-18deg)' }}
+        >
+          <div className="w-full h-full bg-gradient-to-br from-cyan-400/[0.04] via-transparent to-violet-500/[0.03] border border-cyan-400/[0.12] backdrop-blur-[2px] rounded-sm" />
+        </div>
+
+        {/* Glass Shard Panel 2 — lower diagonal */}
+        <div
+          className="absolute top-[45%] right-[0%] w-[320px] h-[220px] origin-center"
+          style={{ transform: 'rotate(22deg)' }}
+        >
+          <div className="w-full h-full bg-gradient-to-tl from-violet-500/[0.04] via-transparent to-sky-400/[0.02] border border-violet-400/[0.1] backdrop-blur-[1px] rounded-sm" />
+        </div>
+
+        {/* Thin Glass Line 1 */}
+        <div
+          className="absolute top-[15%] right-[-10%] w-[120%] h-[1px]"
+          style={{ transform: 'rotate(-22deg)' }}
+        >
+          <div className="w-full h-full bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent" />
+        </div>
+
+        {/* Thin Glass Line 2 */}
+        <div
+          className="absolute top-[55%] right-[-10%] w-[120%] h-[1px]"
+          style={{ transform: 'rotate(18deg)' }}
+        >
+          <div className="w-full h-full bg-gradient-to-r from-transparent via-violet-400/30 to-transparent" />
+        </div>
+
+        {/* Thin Glass Line 3 */}
+        <div
+          className="absolute top-[35%] right-[-10%] w-[120%] h-[1px]"
+          style={{ transform: 'rotate(-12deg)' }}
+        >
+          <div className="w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+        </div>
+
+        {/* Thin Glass Line 4 — subtle */}
+        <div
+          className="absolute top-[72%] right-[-10%] w-[120%] h-[1px]"
+          style={{ transform: 'rotate(-28deg)' }}
+        >
+          <div className="w-full h-full bg-gradient-to-r from-transparent via-cyan-300/15 to-transparent" />
+        </div>
+      </div>
+
+      {/* ═══════════════════════════════════════════════════════════
+          CONTENT LAYER — Text & CTAs (scrolls at near-normal speed)
+          ═══════════════════════════════════════════════════════════ */}
+      <div
+        className="relative z-20 min-h-screen flex flex-col justify-center will-change-transform"
+        style={{ transform: `translateY(${textTranslateY}px)` }}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-28 pb-32 lg:pt-32">
+          <div className="max-w-xl lg:max-w-2xl">
+
+            {/* Role Badge */}
+            <div className="flex items-center gap-2 mb-6">
+              <span className="font-mono text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-cyan-400">
+                CS & Design Engineer
+              </span>
+              <span className="text-slate-600 font-mono">•</span>
+              <span className="font-mono text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-violet-400">
+                AI/ML Developer
+              </span>
             </div>
 
-            {/* Main Name Heading */}
-            <h1 className="text-4xl sm:text-6xl md:text-7xl font-display font-extrabold tracking-tight text-white leading-[1.08] mb-4">
-              <span className="block text-slate-400 text-lg sm:text-xl md:text-2xl font-mono font-normal tracking-wider mb-2 text-glow-cyan">
-                HELLO, I AM
-              </span>
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-100 to-slate-400">
+            {/* Primary Name — Huge Bold */}
+            <h1 className="mb-5">
+              <span className="block text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-display font-extrabold tracking-tighter text-white leading-[0.9]">
                 DHUSHANTH
-              </span>{' '}
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-sky-400 to-violet-500">
+              </span>
+              <span className="block text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-display font-extrabold tracking-tighter leading-[0.9] bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-sky-300 to-violet-500">
                 SRINIVASA
               </span>
             </h1>
 
             {/* Subtitle */}
-            <div className="flex flex-wrap items-center gap-2 text-sm sm:text-base md:text-lg font-mono text-cyan-300/90 mb-6">
-              <span className="text-white font-medium">Software Developer</span>
-              <span className="text-slate-600">//</span>
-              <span className="text-violet-300 font-medium">AI/ML & MLOps</span>
-              <span className="text-slate-600">//</span>
-              <span className="text-sky-300 font-medium">Full-Stack & Cloud</span>
-            </div>
-
-            {/* Introduction paragraph */}
-            <p className="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl mb-8 font-light">
-              B.E. Computer Science & Design undergraduate at{' '}
-              <span className="text-white font-normal underline decoration-cyan-500/40 underline-offset-4">
-                DSATM
-              </span>{' '}
-              (CGPA: 8.54) and Data Science & MLOps Intern at{' '}
-              <span className="text-white font-normal underline decoration-violet-500/40 underline-offset-4">
-                Krosum Labs
-              </span>
-              . Engineering LLM-powered applications, multi-agent frameworks (CYNTHERA), RAG platforms (PlantMind), and scalable cloud microservices.
+            <p className="font-display text-lg sm:text-xl md:text-2xl font-semibold text-slate-200 tracking-wide mb-5">
+              SOFTWARE DEVELOPER{' '}
+              <span className="text-slate-500 font-normal">/</span>{' '}
+              <span className="text-cyan-300">AI & ML ENGINEER</span>
             </p>
 
-            {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-4 mb-10">
+            {/* Bio line */}
+            <p className="text-sm sm:text-base text-slate-400 leading-relaxed max-w-lg mb-8 font-light">
+              Building intelligent software that solves real problems — from RAG knowledge platforms and multi-agent biomedical AI to production-grade full-stack systems.
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-wrap items-center gap-4">
               <a
                 href="#projects"
-                className="group relative inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl font-mono text-sm font-semibold text-white bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 transition-all duration-300 shadow-[0_0_25px_-5px_rgba(0,240,255,0.4)] hover:shadow-[0_0_35px_-2px_rgba(0,240,255,0.6)] transform hover:-translate-y-0.5"
+                className="group inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full font-mono text-sm font-bold uppercase tracking-wider text-white bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 transition-all duration-300 shadow-[0_0_30px_-5px_rgba(0,240,255,0.5)] hover:shadow-[0_0_40px_-2px_rgba(0,240,255,0.7)] transform hover:-translate-y-0.5"
               >
-                <span>Explore My Projects</span>
+                <span>Explore My Work</span>
                 <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
 
               <a
-                href={PORTFOLIO_DATA.personal.resumePath}
-                download="Dhushanth_Srinivasa_Resume.pdf"
-                className="group inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl font-mono text-sm font-medium text-slate-200 glass-panel hover:bg-white/[0.08] hover:text-white border border-white/10 hover:border-violet-500/40 transition-all duration-300 transform hover:-translate-y-0.5"
+                href="#contact"
+                className="group inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full font-mono text-sm font-bold uppercase tracking-wider text-slate-200 bg-white/[0.06] hover:bg-white/[0.12] border border-white/[0.15] hover:border-cyan-400/40 backdrop-blur-sm transition-all duration-300 transform hover:-translate-y-0.5"
               >
-                <FileDown className="w-4 h-4 text-violet-400 group-hover:text-cyan-300 transition-colors" />
-                <span>Download Resume</span>
+                <span>Get In Touch</span>
               </a>
             </div>
 
-            {/* Quick Metrics Strip */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6 border-t border-white/[0.07]">
-              {PORTFOLIO_DATA.personal.stats.map((stat, idx) => (
-                <div key={idx} className="flex flex-col">
-                  <span className="text-xl sm:text-2xl font-mono font-bold text-white tracking-tight">
-                    {stat.value}
-                  </span>
-                  <span className="text-xs font-mono text-slate-400 tracking-wider">
-                    {stat.label}
-                  </span>
-                </div>
-              ))}
-            </div>
-
           </div>
-
-          {/* Right Column: Clean Developer Terminal Card */}
-          <div className="lg:col-span-5 relative flex items-center justify-center">
-            <DeveloperTerminalCard />
-          </div>
-
         </div>
+      </div>
 
-        {/* Scroll Indicator */}
-        <div className="mt-12 lg:mt-16 flex flex-col items-center justify-center text-center">
-          <a
-            href="#about"
-            className="group flex flex-col items-center gap-2 text-xs font-mono text-slate-500 hover:text-cyan-400 transition-colors"
-          >
-            <span className="tracking-widest uppercase text-[11px]">Scroll to Explore</span>
-            <div className="w-5 h-9 rounded-full border border-slate-700 group-hover:border-cyan-400/60 p-1 flex justify-center transition-colors">
-              <div className="w-1.5 h-2 rounded-full bg-cyan-400 animate-bounce" />
-            </div>
-          </a>
+      {/* ═══════════════════════════════════════════════════════════
+          BOTTOM STATS BAR — anchored to bottom of viewport
+          ═══════════════════════════════════════════════════════════ */}
+      <div
+        className="absolute bottom-0 left-0 right-0 z-30 border-t border-white/[0.08] bg-[#030712]/60 backdrop-blur-md"
+        style={{ opacity: imageOpacity }}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 sm:grid-cols-4 divide-x divide-white/[0.06]">
+            {PORTFOLIO_DATA.personal.stats.map((stat, idx) => (
+              <div key={idx} className="py-4 sm:py-5 px-4 sm:px-6 text-center">
+                <span className="block text-lg sm:text-xl font-mono font-bold text-white tracking-tight">
+                  {stat.value}
+                </span>
+                <span className="block text-[10px] sm:text-xs font-mono text-slate-400 uppercase tracking-widest mt-0.5">
+                  {stat.label}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* ═══════════════════════════════════════════════════════════
+          SCROLL INDICATOR — subtle centered bounce
+          ═══════════════════════════════════════════════════════════ */}
+      <div
+        className="absolute bottom-20 sm:bottom-24 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2"
+        style={{ opacity: Math.max(0, 1 - scrollY / 200) }}
+      >
+        <span className="font-mono text-[10px] text-slate-500 uppercase tracking-[0.3em]">
+          Scroll
+        </span>
+        <div className="w-5 h-9 rounded-full border border-slate-600 p-1 flex justify-center">
+          <div className="w-1.5 h-2 rounded-full bg-cyan-400 animate-bounce" />
         </div>
       </div>
     </section>
