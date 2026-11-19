@@ -35,7 +35,7 @@ export const HeroSection: React.FC = () => {
     <section
       id="hero"
       aria-label="Dhushanth Srinivasa — Developer Portfolio Hero"
-      className="relative min-h-screen overflow-hidden bg-[#030712]"
+      className="relative h-[100dvh] sm:min-h-screen sm:h-auto overflow-hidden bg-[#030712]"
     >
       {/* ═══════════════════════════════════════════════════════════
           PARALLAX LAYER 0 — Ambient Glow Orbs (slowest layer)
@@ -154,20 +154,20 @@ export const HeroSection: React.FC = () => {
 
       {/* ═══════════════════════════════════════════════════════════
           CONTENT LAYER — Text & CTAs (scrolls at near-normal speed)
-          On mobile: Altered layout moves text and buttons into empty spaces
-          (top & bottom) so his entire face is 100% visible!
+          On mobile: Locked to dynamic viewport height so all elements,
+          face, and the stats grid are 100% visible on opening page!
           ═══════════════════════════════════════════════════════════ */}
       <div
-        className="relative z-20 min-h-[100dvh] sm:min-h-screen flex flex-col justify-between sm:justify-center will-change-transform"
+        className="relative z-20 h-full sm:min-h-screen flex flex-col justify-between sm:justify-center will-change-transform"
         style={{ transform: `translateY(${textTranslateY}px)` }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 flex flex-col justify-between sm:justify-center sm:block pt-16 pb-[144px] sm:pt-28 sm:pb-32 lg:pt-32">
-          <div className="max-w-xl lg:max-w-2xl flex-1 flex flex-col justify-between sm:block">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex flex-col justify-between sm:justify-center sm:block pt-14 pb-[96px] sm:pt-28 sm:pb-32 lg:pt-32">
+          <div className="max-w-xl lg:max-w-2xl h-full flex flex-col justify-between sm:block">
 
             {/* TOP BLOCK: Role, Academic Line & Bold Heading (positioned in top empty space above forehead) */}
-            <div className="pt-2 sm:pt-0">
+            <div className="pt-1 sm:pt-0">
               {/* Role / Academic Line */}
-              <div className="flex items-center gap-2 mb-2 sm:mb-6 flex-wrap">
+              <div className="flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-6 flex-wrap">
                 <span className="font-mono text-xs sm:text-sm font-semibold tracking-wider text-cyan-400">
                   B.E. CS & Design
                 </span>
@@ -182,33 +182,33 @@ export const HeroSection: React.FC = () => {
               </div>
 
               {/* Primary Name — Huge Bold */}
-              <h1 className="mb-2 sm:mb-5">
-                <span className="block text-4xl sm:text-7xl md:text-8xl lg:text-9xl font-display font-extrabold tracking-tight sm:tracking-tighter text-white leading-[0.95] sm:leading-[0.9] drop-shadow-[0_2px_12px_rgba(3,7,18,0.9)]">
+              <h1 className="mb-1.5 sm:mb-5">
+                <span className="block text-3xl sm:text-7xl md:text-8xl lg:text-9xl font-display font-extrabold tracking-tight sm:tracking-tighter text-white leading-[0.95] sm:leading-[0.9] drop-shadow-[0_2px_12px_rgba(3,7,18,0.9)]">
                   DHUSHANTH
                 </span>
-                <span className="block text-4xl sm:text-7xl md:text-8xl lg:text-9xl font-display font-extrabold tracking-tight sm:tracking-tighter leading-[0.95] sm:leading-[0.9] bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-sky-300 to-violet-500 drop-shadow-[0_2px_12px_rgba(3,7,18,0.9)]">
+                <span className="block text-3xl sm:text-7xl md:text-8xl lg:text-9xl font-display font-extrabold tracking-tight sm:tracking-tighter leading-[0.95] sm:leading-[0.9] bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-sky-300 to-violet-500 drop-shadow-[0_2px_12px_rgba(3,7,18,0.9)]">
                   SRINIVASA
                 </span>
               </h1>
 
               {/* Primary Title */}
-              <p className="font-display text-base sm:text-2xl md:text-3xl font-semibold text-slate-100 tracking-wide mb-1 sm:mb-5 drop-shadow-[0_2px_8px_rgba(3,7,18,0.8)]">
+              <p className="font-display text-sm sm:text-2xl md:text-3xl font-semibold text-slate-100 tracking-wide mb-1 sm:mb-5 drop-shadow-[0_2px_8px_rgba(3,7,18,0.8)]">
                 AI/ML Engineer <span className="text-slate-400 font-normal">&</span> <span className="text-cyan-300">Software Developer</span>
               </p>
             </div>
 
             {/* LOWER BLOCK: Bio line & CTA Buttons placed exactly above the stats grid (mobile only) */}
-            <div className="mt-auto sm:mt-0 pt-4 sm:pt-0">
+            <div className="mt-auto sm:mt-0 pt-2 sm:pt-0">
               {/* Bio line */}
-              <p className="text-xs sm:text-base text-slate-300 leading-relaxed max-w-sm sm:max-w-lg mb-2.5 sm:mb-8 font-normal drop-shadow-[0_1px_6px_rgba(3,7,18,0.9)]">
+              <p className="text-[11px] sm:text-base text-slate-300 leading-snug max-w-sm sm:max-w-lg mb-2 sm:mb-8 font-normal drop-shadow-[0_1px_6px_rgba(3,7,18,0.9)]">
                 Building intelligent software that solves real problems — from RAG knowledge platforms and multi-agent biomedical AI to end-to-end full-stack systems.
               </p>
 
               {/* CTA Buttons */}
-              <div className="flex flex-row items-center gap-2.5 sm:gap-4 flex-wrap">
+              <div className="flex flex-row items-center gap-2 sm:gap-4 flex-wrap">
                 <a
                   href="#projects"
-                  className="group inline-flex items-center justify-center gap-2 px-4 py-2.5 sm:px-7 sm:py-3.5 rounded-full font-mono text-xs sm:text-sm font-bold uppercase tracking-wider text-white bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 transition-all duration-300 shadow-[0_0_30px_-5px_rgba(0,240,255,0.5)] hover:shadow-[0_0_40px_-2px_rgba(0,240,255,0.7)] transform hover:-translate-y-0.5"
+                  className="group inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3.5 py-2 sm:px-7 sm:py-3.5 rounded-full font-mono text-xs sm:text-sm font-bold uppercase tracking-wider text-white bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 transition-all duration-300 shadow-[0_0_30px_-5px_rgba(0,240,255,0.5)] hover:shadow-[0_0_40px_-2px_rgba(0,240,255,0.7)] transform hover:-translate-y-0.5"
                 >
                   <span>Explore My Work</span>
                   <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -216,7 +216,7 @@ export const HeroSection: React.FC = () => {
 
                 <a
                   href="#contact"
-                  className="group inline-flex items-center justify-center gap-2 px-4 py-2.5 sm:px-7 sm:py-3.5 rounded-full font-mono text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-200 bg-white/[0.06] hover:bg-white/[0.12] border border-white/[0.15] hover:border-cyan-400/40 backdrop-blur-sm transition-all duration-300 transform hover:-translate-y-0.5"
+                  className="group inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3.5 py-2 sm:px-7 sm:py-3.5 rounded-full font-mono text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-200 bg-white/[0.06] hover:bg-white/[0.12] border border-white/[0.15] hover:border-cyan-400/40 backdrop-blur-sm transition-all duration-300 transform hover:-translate-y-0.5"
                 >
                   <span>Get In Touch</span>
                 </a>
@@ -228,20 +228,20 @@ export const HeroSection: React.FC = () => {
       </div>
 
       {/* ═══════════════════════════════════════════════════════════
-          BOTTOM STATS BAR — anchored to bottom of viewport
+          BOTTOM STATS BAR — anchored to bottom of viewport (100% visible on open)
           ═══════════════════════════════════════════════════════════ */}
       <div
-        className="absolute bottom-0 left-0 right-0 z-30 border-t border-white/[0.08] bg-[#030712]/60 backdrop-blur-md"
+        className="absolute bottom-0 left-0 right-0 z-30 border-t border-white/[0.08] bg-[#030712]/80 backdrop-blur-md"
         style={{ opacity: imageOpacity }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 sm:grid-cols-4 divide-x divide-white/[0.06]">
             {PORTFOLIO_DATA.personal.stats.map((stat, idx) => (
-              <div key={idx} className="py-2.5 sm:py-5 px-3 sm:px-6 text-center">
-                <span className="block text-base sm:text-xl font-mono font-bold text-white tracking-tight">
+              <div key={idx} className="py-2 sm:py-5 px-2.5 sm:px-6 text-center">
+                <span className="block text-sm sm:text-xl font-mono font-bold text-white tracking-tight">
                   {stat.value}
                 </span>
-                <span className="block text-[9px] sm:text-xs font-mono text-slate-400 uppercase tracking-widest mt-0.5">
+                <span className="block text-[8px] sm:text-xs font-mono text-slate-400 uppercase tracking-widest mt-0.5">
                   {stat.label}
                 </span>
               </div>
