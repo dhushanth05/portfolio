@@ -110,8 +110,8 @@ export const PORTFOLIO_DATA = {
   about: {
     heading: "Developing Reliable, High-Impact AI Systems",
     paragraphs: [
-      "I am a Final-year B.E. student in Computer Science and Design at Dayananda Sagar Academy of Technology and Management (DSATM), Bengaluru, graduating in 2027.",
-      "My technical focus spans applied AI/ML, retrieval-augmented generation (RAG), and multi-agent AI systems, alongside end-to-end full-stack software development.",
+      "I am a final-year B.E. student in Computer Science and Design at Dayananda Sagar Academy of Technology and Management (DSATM), Bengaluru, graduating in 2027.",
+      "My technical focus centers on applied AI/ML, full-stack development, data analyst, and agentic AI systems.",
       "Currently, I am interning at Krosum Labs as a Data Science & MLOps Intern, building and evaluating supervised machine learning models on banking datasets."
     ],
     pillars: [

@@ -62,10 +62,10 @@ export const AboutSection: React.FC = () => {
             <div className="lg:col-span-8 flex flex-col justify-between space-y-6">
               <div className="space-y-4 text-slate-200 text-sm sm:text-base leading-relaxed font-normal">
                 <p>
-                  I am a Final-year B.E. student in <span className="text-white font-medium">Computer Science and Design</span> at <span className="text-cyan-300 font-medium">Dayananda Sagar Academy of Technology and Management (DSATM)</span>, Bengaluru, graduating in 2027.
+                  I am a final-year B.E. student in <span className="text-white font-medium">Computer Science and Design</span> at <span className="text-cyan-300 font-medium">Dayananda Sagar Academy of Technology and Management (DSATM)</span>, Bengaluru, graduating in 2027.
                 </p>
                 <p>
-                  My technical focus centers on applied <span className="text-white font-medium">AI/ML</span>, <span className="text-cyan-300 font-medium">retrieval-augmented generation (RAG)</span>, and <span className="text-violet-300 font-medium">agentic AI systems</span>, alongside full-stack software engineering.
+                  My technical focus centers on <span className="text-white font-bold">applied AI/ML</span>, <span className="text-cyan-300 font-medium">full-stack development</span>, <span className="text-cyan-300 font-medium">data analyst</span>, and <span className="text-violet-300 font-medium">agentic AI systems</span>.
                 </p>
                 <p>
                   Currently, I am interning at <span className="text-white font-medium">Krosum Labs</span> as a <span className="text-cyan-300 font-medium">Data Science & MLOps Intern</span>, gaining hands-on industry experience building and evaluating supervised machine learning models on banking datasets.
