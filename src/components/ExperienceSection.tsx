@@ -1,19 +1,25 @@
 import React from 'react';
-import { Briefcase, Calendar, MapPin, ChevronRight, CheckCircle2, Sparkles, Building2 } from 'lucide-react';
+import { Calendar, MapPin, ChevronRight } from 'lucide-react';
 import { PORTFOLIO_DATA } from '../data/portfolioData';
 
 export const ExperienceSection: React.FC = () => {
   return (
-    <section id="experience" className="relative py-24 lg:py-32 overflow-hidden">
+    <section id="experience" className="relative py-16 lg:py-24 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="flex flex-col mb-16">
+        <div className="flex flex-col mb-12">
+          <div className="flex items-center gap-2 mb-2">
+            <span className="font-mono text-cyan-400 text-xs sm:text-sm tracking-widest uppercase">
+              // EXPERIENCE
+            </span>
+            <div className="h-[1px] w-12 bg-cyan-500/40" />
+          </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-white tracking-tight">
-            Professional Trajectory & <span className="bg-clip-text text-transparent bg-gradient-to-r from-violet-400 to-cyan-400">Engineering Work</span>
+            Work Experience & <span className="bg-clip-text text-transparent bg-gradient-to-r from-violet-400 to-cyan-400">Industry Training</span>
           </h2>
-          <p className="mt-3 text-slate-400 text-base max-w-2xl font-light">
-            Hands-on work developing supervised machine learning models on banking datasets, distributed pipelines, and MLOps tooling.
+          <p className="mt-3 text-slate-300 text-sm sm:text-base max-w-2xl font-normal">
+            Hands-on training in supervised machine learning on banking datasets, with exposure to distributed data processing and MLOps tooling.
           </p>
         </div>
 
@@ -33,7 +39,7 @@ export const ExperienceSection: React.FC = () => {
                 {/* Header row */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
                   <div>
-                    <span className="font-mono text-xs text-cyan-400 tracking-wider uppercase font-semibold">
+                    <span className="font-mono text-xs sm:text-sm text-cyan-400 tracking-wider uppercase font-semibold">
                       {exp.type}
                     </span>
                     <h3 className="text-xl sm:text-2xl font-display font-bold text-white mt-1">
@@ -42,20 +48,20 @@ export const ExperienceSection: React.FC = () => {
                     <div className="flex items-center gap-2 mt-1 text-sm font-mono text-violet-300">
                       <span>{exp.company}</span>
                       <span className="text-slate-600">•</span>
-                      <span className="text-slate-400 text-xs flex items-center gap-1">
-                        <MapPin className="w-3 h-3 text-slate-500" />
+                      <span className="text-slate-300 text-xs sm:text-sm flex items-center gap-1">
+                        <MapPin className="w-3.5 h-3.5 text-cyan-400" />
                         {exp.location}
                       </span>
                     </div>
                   </div>
 
                   <div className="flex items-center gap-2">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-medium bg-cyan-950/60 border border-cyan-500/40 text-cyan-300 shadow-[0_0_12px_rgba(0,240,255,0.2)]">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs sm:text-sm font-mono font-medium bg-cyan-950/60 border border-cyan-500/40 text-cyan-300 shadow-[0_0_12px_rgba(0,240,255,0.2)]">
                       <Calendar className="w-3.5 h-3.5" />
                       {exp.period}
                     </span>
                     {exp.status === 'Current' && (
-                      <span className="px-2.5 py-1 rounded-full text-[11px] font-mono bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
+                      <span className="px-2.5 py-1 rounded-full text-xs font-mono bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
                         Active Intern
                       </span>
                     )}
@@ -63,18 +69,18 @@ export const ExperienceSection: React.FC = () => {
                 </div>
 
                 {/* Summary */}
-                <p className="text-slate-300 text-sm sm:text-base leading-relaxed font-light mb-6">
+                <p className="text-slate-200 text-sm sm:text-base leading-relaxed font-normal mb-6">
                   {exp.summary}
                 </p>
 
                 {/* Responsibilities list */}
                 <div className="space-y-2.5 mb-6">
-                  <h4 className="text-xs font-mono uppercase tracking-wider text-slate-400">
-                    Core Workflows & Accomplishments:
+                  <h4 className="text-xs sm:text-sm font-mono uppercase tracking-wider text-slate-300 font-semibold">
+                    Core Workflows & Learning:
                   </h4>
                   <ul className="space-y-2.5">
                     {exp.responsibilities.map((resp, rIdx) => (
-                      <li key={rIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300 font-light leading-relaxed">
+                      <li key={rIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-200 font-normal leading-relaxed">
                         <ChevronRight className="w-4 h-4 text-cyan-400 mt-0.5 shrink-0" />
                         <span>{resp}</span>
                       </li>
@@ -84,11 +90,11 @@ export const ExperienceSection: React.FC = () => {
 
                 {/* Tech Tags */}
                 <div className="pt-4 border-t border-white/[0.06] flex flex-wrap items-center gap-2">
-                  <span className="text-xs font-mono text-slate-400 mr-2">Technologies & Tooling:</span>
+                  <span className="text-xs sm:text-sm font-mono text-slate-300 mr-2">Technologies & Tooling:</span>
                   {exp.technologies.map((tech) => (
                     <span
                       key={tech}
-                      className="text-xs font-mono px-2.5 py-1 rounded-lg bg-white/[0.03] text-cyan-300 border border-white/[0.07]"
+                      className="text-xs font-mono px-2.5 py-1 rounded-lg bg-white/[0.03] text-cyan-300 border border-white/[0.08]"
                     >
                       {tech}
                     </span>

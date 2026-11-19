@@ -1,14 +1,17 @@
 export interface ProjectItem {
   id: string;
   title: string;
-  subtitle: string;
+  subtitle?: string;
   description: string;
-  category: 'AI / GenAI' | 'Full-Stack' | 'BioAI & Multi-Agent';
+  category: string;
   tags: string[];
   githubUrl: string;
   liveDemoUrl?: string;
+  demoVideoUrl?: string;
   featured: boolean;
-  highlights: string[];
+  highlights?: string[];
+  teamTag?: string;
+  roleDescription?: string;
 }
 
 export interface SkillCategory {
@@ -19,6 +22,7 @@ export interface SkillCategory {
   skills: {
     name: string;
     tag?: string;
+    badge?: string;
   }[];
 }
 
@@ -34,6 +38,16 @@ export interface ExperienceItem {
   technologies: string[];
 }
 
+export interface SchoolingItem {
+  level: string;
+  year: string;
+  score: string;
+  title: string;
+  subjects?: string;
+  institution: string;
+  board: string;
+}
+
 export interface EducationItem {
   degree: string;
   field: string;
@@ -42,14 +56,23 @@ export interface EducationItem {
   graduationYear: string;
   location: string;
   cgpa: string;
-  priorEducation: {
+  highlights: string[];
+  keyCoursework: string[];
+  schooling: SchoolingItem[];
+  priorEducation?: {
     title: string;
     board: string;
     score: string;
   }[];
-  coreSubjects: string[];
-  highlights: string[];
+  coreSubjects?: string[];
 }
+
+export interface CertificateLink {
+  title: string;
+  url: string;
+}
+
+export const ALL_CERTIFICATES_URL = "https://github.com/dhushanth05/Certifications";
 
 export interface AchievementItem {
   title: string;
@@ -57,35 +80,39 @@ export interface AchievementItem {
   period: string;
   description: string;
   badge?: string;
+  footerLabel?: string;
+  category?: 'hackathon' | 'certification';
+  credentialUrl?: string;
+  credentialLinks?: CertificateLink[];
 }
 
 export const PORTFOLIO_DATA = {
   personal: {
     name: "DHUSHANTH SRINIVASA",
-    tagline: "AI/ML Engineer | Full-Stack Developer | Data Science Intern",
-    shortBio: "Aspiring AI/ML Engineer with a strong foundation in Python, Java, SQL, Data Structures and Algorithms, and Full-Stack Development. Experienced in building LLM-powered applications, RAG-based industrial knowledge systems, and multi-agent AI frameworks.",
+    tagline: "AI/ML Engineer & Software Developer | DSATM '27 | Krosum Labs Intern",
+    shortBio: "Aspiring AI/ML Engineer with a solid foundation in applied machine learning, RAG systems, and full-stack software development. Currently interning at Krosum Labs and studying at DSATM Bengaluru.",
     location: "Bangalore, Karnataka, India",
     phone: "+91 9964185141",
     email: "sdhushanth123@gmail.com",
     github: "https://github.com/dhushanth05",
     linkedin: "https://linkedin.com/in/dhushanth-srinivasa",
     resumePath: "/Dhushanth_Srinivasa_Resume.pdf",
-    profileImage: "/profile.jpg",
+    profileImage: "/profile.webp",
     statusBadge: "Active Data Science & MLOps Intern @ Krosum Labs",
     stats: [
       { label: "Graduation", value: "2027" },
       { label: "Current CGPA", value: "8.54" },
-      { label: "Intern", value: "AI/ML & MLOps" },
+      { label: "Krosum Labs · AI/ML & MLOps", value: "Intern" },
       { label: "Location", value: "Bengaluru, IN" },
     ]
   },
 
   about: {
-    heading: "Developing Scalable, Reliable & Intelligent AI Systems",
+    heading: "Developing Reliable, High-Impact AI Systems",
     paragraphs: [
-      "I am an aspiring AI/ML Engineer and undergraduate in Computer Science and Design at Dayananda Sagar Academy of Technology and Management (DSATM), Bangalore, graduating in 2027 with a strong academic foundation (CGPA: 8.54).",
-      "Currently interning at Krosum Labs as a Data Science & MLOps Intern, I build and evaluate supervised machine learning models on banking datasets using scikit-learn, engineer feature extraction workflows, and work with distributed data pipelines via PySpark, Apache Spark, Airflow, and Grafana.",
-      "Beyond production models, I have engineered end-to-end intelligent systems: from an 8-stage RAG industrial knowledge platform (PlantMind) that won accolades at ET AI Hackathon 2.0, to CYNTHERA, a multi-agent biomedical evidence graph framework for drug repurposing with a 90.7% precision benchmark."
+      "I am a Final-year B.E. student in Computer Science and Design at Dayananda Sagar Academy of Technology and Management (DSATM), Bengaluru, graduating in 2027.",
+      "My technical focus spans applied AI/ML, retrieval-augmented generation (RAG), and multi-agent AI systems, alongside end-to-end full-stack software development.",
+      "Currently, I am interning at Krosum Labs as a Data Science & MLOps Intern, building and evaluating supervised machine learning models on banking datasets."
     ],
     pillars: [
       {
@@ -95,12 +122,12 @@ export const PORTFOLIO_DATA = {
       },
       {
         title: "Full-Stack Development",
-        desc: "Containerized full-stack services using FastAPI, Next.js, React, Node.js, and JWT-authenticated REST APIs.",
+        desc: "Containerized services using FastAPI, Next.js, React, Node.js, and JWT-authenticated REST APIs.",
         icon: "Layers"
       },
       {
         title: "Data Science & MLOps",
-        desc: "Distributed processing with PySpark, Spark streaming, Apache Airflow workflow scheduling, and Grafana telemetry.",
+        desc: "Distributed data pipelines with PySpark, Spark streaming, Apache Airflow scheduling, and Grafana monitoring.",
         icon: "Database"
       },
       {
@@ -119,7 +146,7 @@ export const PORTFOLIO_DATA = {
       type: "Industry Internship",
       period: "Aug 2026 – Present",
       status: "Current",
-      summary: "Undergoing rigorous industry training and working on production banking datasets, predictive modeling, and data pipelines.",
+      summary: "Currently training in applied machine learning and working hands-on with banking datasets.",
       responsibilities: [
         "Building and evaluating supervised machine learning models on banking datasets using scikit-learn, covering model training, validation, and performance metrics.",
         "Cleaning, preprocessing, and analysing banking data using Python, NumPy, Pandas, and Matplotlib to prepare high-quality features for modelling.",
@@ -131,6 +158,39 @@ export const PORTFOLIO_DATA = {
   ] as ExperienceItem[],
 
   projects: [
+    {
+      id: "resumepilot",
+      title: "ResumePilot AI",
+      subtitle: "Full-Stack AI Resume Analyzer & Match Scoring Platform",
+      description: "An end-to-end full-stack AI platform that performs deep semantic matching between resumes and job descriptions with skill extraction and token-efficient caching.",
+      category: "Full-Stack",
+      tags: ["Next.js", "FastAPI", "PostgreSQL", "Redis", "Docker", "OpenAI", "Sentence Transformers", "spaCy"],
+      githubUrl: "https://github.com/dhushanth05/ResumePilot",
+      featured: true,
+      highlights: [
+        "Architected full-stack solution with JWT-authenticated REST APIs, Next.js frontend, and a FastAPI backend containerized with Docker.",
+        "Implemented resume-to-job-description semantic matching using OpenAI, Sentence Transformers, and spaCy for skill extraction and scoring.",
+        "Added Redis caching of resume-analysis and embedding results to eliminate redundant OpenAI API calls, significantly reducing latency and API expenditure."
+      ]
+    },
+    {
+      id: "cynthera",
+      title: "CYNTHERA",
+      subtitle: "Evidence-Traceable Multi-Agent AI Framework for Drug Repurposing",
+      description: "A collaborative multi-agent AI framework for drug repurposing that turns a drug–disease hypothesis into a SUPPORT / OPPOSE / UNCERTAIN assessment using 8+ open biomedical databases.",
+      category: "BioAI & Multi-Agent",
+      teamTag: "Team Project (4 members)",
+      roleDescription: "Backend & FastAPI integration, Investigation Playground, evidence-graph testing & 100-case frozen evaluation.",
+      tags: ["Python", "FastAPI", "Streamlit", "REST APIs", "SQLite", "Multi-Agent AI", "Graph Algorithms"],
+      githubUrl: "https://github.com/dhushanth05/cynthera",
+      featured: true,
+      highlights: [
+        "Built the multi-hop evidence graph and DFS-based pathfinder for Drug → Target → Pathway → Gene → Disease chains.",
+        "Engineered a mechanism validator and evidence polarity classifier.",
+        "Developed an interactive Streamlit investigation workspace with FastAPI endpoints for subgraph exploration, source tracing, and what-if analysis.",
+        "Validated graph and pathway outputs contributing to a frozen 100-case benchmark (100% traceable conclusions, 90.7% SUPPORT precision, 5% false-promising rate)."
+      ]
+    },
     {
       id: "plantmind",
       title: "PlantMind",
@@ -144,39 +204,47 @@ export const PORTFOLIO_DATA = {
         "Engineered an 8-stage ingestion pipeline covering text extraction, chunking, entity extraction, embeddings, and knowledge-graph construction.",
         "Implemented hybrid retrieval combining vector search with Neo4j graph context and Redis caching.",
         "Integrated a Gemini-powered copilot answering complex queries with citations grounded in retrieved document chunks.",
-        "Developed a React & TypeScript workspace with interactive knowledge-graph explorer and 5 analytics dashboards backed by 15+ FastAPI endpoints and a 5-service Docker Compose stack."
+        "Developed a React & TypeScript workspace with interactive knowledge-graph explorer backed by 15+ FastAPI endpoints."
       ]
+    }
+  ] as ProjectItem[],
+
+  moreProjects: [
+    {
+      id: "filmpire",
+      title: "Filmpire",
+      description: "Movie discovery web app with TMDB-powered search, genre filtering, movie and actor details, favorites and watchlist, dark/light mode, and franchise timeline guides with an interactive movie quiz.",
+      category: "Web App",
+      tags: ["React", "Redux Toolkit", "Material UI", "TMDB API", "Axios"],
+      githubUrl: "https://github.com/dhushanth05/Filmpire",
+      featured: false
     },
     {
-      id: "cynthera",
-      title: "CYNTHERA",
-      subtitle: "Evidence-Traceable Multi-Agent AI Framework for Drug Repurposing",
-      description: "A collaborative multi-agent AI framework for drug repurposing that turns a drug–disease hypothesis into a SUPPORT / OPPOSE / UNCERTAIN assessment using 8+ open biomedical databases.",
-      category: "BioAI & Multi-Agent",
-      tags: ["Python", "FastAPI", "Streamlit", "REST APIs", "SQLite", "Multi-Agent AI", "Graph Algorithms"],
-      githubUrl: "https://github.com/dhushanth05/cynthera",
-      featured: true,
-      highlights: [
-        "Built the multi-hop evidence graph and DFS-based pathfinder for Drug → Target → Pathway → Gene → Disease chains.",
-        "Engineered a mechanism validator and evidence polarity classifier.",
-        "Developed an interactive Streamlit investigation workspace with FastAPI endpoints for subgraph exploration, source tracing, and what-if analysis.",
-        "Validated graph and pathway outputs contributing to a frozen 100-case benchmark (100% traceable conclusions, 90.7% SUPPORT precision, 5% false-promising rate)."
-      ]
+      id: "ar-skeleton",
+      title: "AR Human Skeleton Learning System",
+      description: "Interactive augmented-reality anatomical visualization tool built using Python, OpenCV, and ArUco markers to track and overlay 3D skeletal structures in real time.",
+      category: "Augmented Reality",
+      tags: ["Python", "OpenCV", "ArUco", "Computer Vision"],
+      githubUrl: "https://github.com/dhushanth05/HumanSkeletonAR",
+      featured: false
     },
     {
-      id: "resumepilot",
-      title: "ResumePilot AI",
-      subtitle: "Full-Stack AI Resume Analyzer & Match Scoring Platform",
-      description: "A production-grade full-stack AI platform that performs deep semantic matching between resumes and job descriptions with skill extraction and token-efficient caching.",
-      category: "Full-Stack",
-      tags: ["Next.js", "FastAPI", "PostgreSQL", "Redis", "Docker", "OpenAI", "Sentence Transformers", "spaCy"],
-      githubUrl: "https://github.com/dhushanth05/ResumePilot",
-      featured: true,
-      highlights: [
-        "Architected full-stack solution with JWT-authenticated REST APIs, Next.js frontend, and a FastAPI backend containerized with Docker.",
-        "Implemented resume-to-job-description semantic matching using OpenAI, Sentence Transformers, and spaCy for skill extraction and scoring.",
-        "Added Redis caching of resume-analysis and embedding results to eliminate redundant OpenAI API calls, significantly reducing latency and API expenditure."
-      ]
+      id: "storyspire",
+      title: "StorySpire",
+      description: "Interactive creative storytelling and narrative generation web application powered by modern generative AI models and reactive frontend components.",
+      category: "Generative AI",
+      tags: ["React", "Python", "FastAPI", "Generative AI", "TailwindCSS"],
+      githubUrl: "https://github.com/dhushanth05/StorySpire",
+      featured: false
+    },
+    {
+      id: "library-mgmt",
+      title: "Library Management System",
+      description: "Full-featured database-driven desktop and web management platform for automated book inventory cataloging, circulation tracking, and member administration.",
+      category: "Software Engineering",
+      tags: ["Python", "SQL", "Database Design", "CRUD Architecture"],
+      githubUrl: "https://github.com/dhushanth05/Library-Management-System",
+      featured: false
     }
   ] as ProjectItem[],
 
@@ -192,6 +260,8 @@ export const PORTFOLIO_DATA = {
         { name: "Gemini API", tag: "Multimodal LLMs" },
         { name: "RAG", tag: "Hybrid Vector + Graph" },
         { name: "LangGraph", tag: "Multi-Agent Workflows" },
+        { name: "CNN & Transfer Learning", tag: "Deep Learning" },
+        { name: "OpenCV", tag: "Computer Vision" },
         { name: "Sentence Transformers", tag: "Dense Embeddings" },
         { name: "spaCy", tag: "NLP & Entity Extraction" }
       ]
@@ -205,9 +275,9 @@ export const PORTFOLIO_DATA = {
         { name: "NumPy", tag: "Numerical Arrays" },
         { name: "Pandas", tag: "Data Preprocessing" },
         { name: "Matplotlib", tag: "Visualization & EDA" },
-        { name: "PySpark", tag: "Distributed Python" },
-        { name: "Apache Spark", tag: "Streaming & Pipelines" },
-        { name: "Apache Airflow", tag: "DAG Orchestration" }
+        { name: "PySpark", tag: "Distributed Data", badge: "Learning" },
+        { name: "Apache Spark", tag: "Streaming", badge: "Learning" },
+        { name: "Apache Airflow", tag: "DAG Pipelines", badge: "Learning" }
       ]
     },
     {
@@ -225,26 +295,20 @@ export const PORTFOLIO_DATA = {
       ]
     },
     {
-      title: "Backend & APIs",
-      categoryKey: "backend",
-      description: "Asynchronous microservices, secure authentication, and RESTful APIs.",
+      title: "Full-Stack & Backend Systems",
+      categoryKey: "fullstack",
+      description: "Reactive web interfaces, high-performance async microservices, and secure REST APIs.",
       iconName: "Server",
       skills: [
-        { name: "FastAPI", tag: "High-Performance Async" },
-        { name: "REST APIs", tag: "Clean Endpoint Architecture" },
-        { name: "JWT Auth", tag: "Stateless Security" },
-        { name: "Node.js", tag: "Backend Runtime" }
-      ]
-    },
-    {
-      title: "Web & Frontend",
-      categoryKey: "frontend",
-      description: "Interactive reactive user interfaces, data visualization dashboards, and mobile UI.",
-      iconName: "Layout",
-      skills: [
         { name: "React.js", tag: "Component Architecture" },
+        { name: "FastAPI", tag: "High-Performance Async" },
+        { name: "Flask", tag: "Microservices & Web APIs" },
         { name: "Next.js", tag: "App Router & SSR" },
+        { name: "React Native", tag: "Cross-Platform Mobile" },
+        { name: "Node.js", tag: "Backend Runtime" },
+        { name: "REST APIs", tag: "Clean Endpoint Architecture" },
         { name: "Streamlit", tag: "Rapid AI Prototyping" },
+        { name: "JWT Auth", tag: "Stateless Security" },
         { name: "HTML5 / CSS3", tag: "Modern Layouts & UI" }
       ]
     },
@@ -256,6 +320,7 @@ export const PORTFOLIO_DATA = {
       skills: [
         { name: "PostgreSQL", tag: "Relational DB" },
         { name: "MongoDB", tag: "Document Store" },
+        { name: "Supabase", tag: "Postgres & Auth BaaS" },
         { name: "Neo4j", tag: "Knowledge Graph" },
         { name: "Redis", tag: "Caching & Queues" },
         { name: "SQLite", tag: "Lightweight Persistence" },
@@ -271,8 +336,9 @@ export const PORTFOLIO_DATA = {
         { name: "Git", tag: "Version Control" },
         { name: "GitHub", tag: "CI/CD & Collaboration" },
         { name: "Docker", tag: "Containerization" },
-        { name: "Grafana", tag: "Telemetry & Dashboards" },
-        { name: "pytest", tag: "Automated Unit Tests" }
+        { name: "Grafana", tag: "Dashboards", badge: "Learning" },
+        { name: "pytest", tag: "Automated Unit Tests" },
+        { name: "Figma (UI/UX)", tag: "Interface Design & Wireframing" }
       ]
     }
   ] as SkillCategory[],
@@ -285,77 +351,151 @@ export const PORTFOLIO_DATA = {
     graduationYear: "2027",
     location: "Bangalore, Karnataka, India",
     cgpa: "8.54",
-    priorEducation: [
+    highlights: [],
+    keyCoursework: [
+      "Data Structures & Algorithms",
+      "Design & Analysis of Algorithms",
+      "Object-Oriented Programming (Java)",
+      "Database Management Systems (SQL)",
+      "Operating Systems",
+      "Computer Networks",
+      "Software Engineering & Agile Methodologies",
+      "Artificial Intelligence & Machine Learning",
+      "Generative AI",
+      "Agentic AI",
+      "Big Data Analytics",
+      "Human-Computer Interaction",
+      "Cryptography & Network Security",
+      "Computer Graphics & Visualization",
+      "Web Technology",
+      "Salesforce AI with Data Cloud",
+      "Mobile Application Development"
+    ],
+    schooling: [
       {
-        title: "Pre-University Course (PUC - PCMB)",
-        board: "Karnataka State Board",
-        score: "92.17%"
+        level: "PRE-UNIVERSITY (12TH)",
+        year: "Passed 2023",
+        score: "92.17%",
+        title: "Pre-University Course (PUC), PCMB",
+        subjects: "Physics, Chemistry, Mathematics, Biology",
+        institution: "Christ Academy PU College, Bengaluru",
+        board: "Karnataka State Board"
       },
       {
-        title: "Secondary School Examination (10th)",
-        board: "CBSE Board",
-        score: "91.33%"
+        level: "SECONDARY SCHOOL (10TH)",
+        year: "Passed 2021",
+        score: "91.33%",
+        title: "Secondary School Examination",
+        subjects: "Science, Social Studies, Mathematics, Computer Science",
+        institution: "Surana Vidyalaya, Bengaluru",
+        board: "CBSE"
       }
-    ],
-    coreSubjects: [
-      "Data Structures & Algorithms",
-      "Object-Oriented Programming (Java / Python)",
-      "Database Management Systems (SQL)",
-      "Operating Systems & Computer Networks",
-      "Artificial Intelligence & Machine Learning",
-      "Human-Computer Interaction & Design Systems",
-      "Software Engineering & Architecture",
-      "Graph Theory & Computational Logic"
-    ],
-    highlights: [
-      "Current Cumulative Grade Point Average (CGPA): 8.54 / 10.",
-      "Hands-on project work in LLM architectures, Graph Neural Networks, and containerized microservices.",
-      "Consistently demonstrated academic excellence with 92.17% in PUC and 91.33% in 10th CBSE."
     ]
   } as EducationItem,
 
   achievements: [
+    // 1. Hackathons & Recognitions (6 items, newest first)
     {
-      title: "SBI Hackathon, Global Fintech Fest 2026",
+      title: "Data Science with GenAI & Agentic AI Workshop",
+      organization: "Innomatics Research Labs",
+      category: "hackathon",
+      period: "Nov 2026",
+      description: "5-day workshop on Generative AI and Agentic AI in data science.",
+      badge: "Participation",
+      footerLabel: "PARTICIPATION",
+      credentialUrl: "https://drive.google.com/file/d/1JDX2q5aj6b8Q3urAaN12VXliTGkzxaXH/view?usp=sharing"
+    },
+    {
+      title: "SBI Hackathon, Global Fintech Fest 2026 (FinPulse AI)",
       organization: "State Bank of India & GFF",
+      category: "hackathon",
       period: "Sep 2026",
-      description: "Shortlisted in the Idea Submission Phase for innovating AI-driven fintech solutions.",
-      badge: "Shortlisted"
+      description: "Shortlisted in the Idea Submission Phase for FinPulse AI, an agentic customer-engagement and fintech intelligence platform.",
+      badge: "Shortlisted",
+      footerLabel: "SHORTLISTED",
+      credentialUrl: "https://drive.google.com/file/d/1P2BjY95Dp81bKjHvLc1j1zZ2mhawVCrX/view?usp=drive_link"
     },
     {
       title: "ET AI Hackathon 2.0",
       organization: "The Economic Times",
+      category: "hackathon",
       period: "Aug 2026",
       description: "Engineered PlantMind, an AI industrial knowledge platform powered by RAG, LangGraph, FastAPI, and React.",
-      badge: "Hackathon Builder"
-    },
-    {
-      title: "Honeywell Future Skills Edge: AI (80 hrs)",
-      organization: "Honeywell & BharatCares",
-      period: "Feb – Mar 2026",
-      description: "Comprehensive 80-hour intensive program in Artificial Intelligence and Machine Learning applications.",
-      badge: "Certified"
-    },
-    {
-      title: "Frontend Developer (React) Certificate",
-      organization: "HackerRank",
-      period: "May 2026",
-      description: "Demonstrated verified proficiency in React component lifecycle, state management, and modern hooks.",
-      badge: "Certified"
-    },
-    {
-      title: "Forage Virtual Experience Programs",
-      organization: "JPMorgan Chase & Tata Group",
-      period: "Jan 2026",
-      description: "Completed Software Engineering simulation with JPMorgan Chase and GenAI Data Analytics with Tata Group.",
-      badge: "Completed"
+      badge: "Hackathon Builder",
+      footerLabel: "HACKATHON BUILDER",
+      credentialUrl: "https://drive.google.com/file/d/1ik1seRqzOLIOFrXHg3MW-MGZyt5ZZ4_T/view?usp=drive_link"
     },
     {
       title: "Salesforce Agentblazer Champion",
       organization: "Salesforce",
+      category: "hackathon",
       period: "2025 & 2026",
       description: "Recognized champion in agentic AI capabilities and Salesforce developer ecosystem.",
-      badge: "Champion"
+      badge: "Champion",
+      footerLabel: "CHAMPION",
+      credentialUrl: "https://www.salesforce.com/trailblazer/ayabgem1on1rz58a4t"
+    },
+    {
+      title: "Artificial Intelligence Fundamentals",
+      organization: "IBM SkillsBuild",
+      category: "hackathon",
+      period: "Feb 2026",
+      description: "Foundational AI concepts, machine learning basics, and responsible AI practices.",
+      badge: "Certified",
+      footerLabel: "CERTIFIED",
+      credentialUrl: "https://drive.google.com/file/d/1TPnOmdLzheTpfUQ9XPzyQYlQ99Vq1-Uv/view?usp=sharing"
+    },
+    {
+      title: "Generative AI Workshop & Hackathon",
+      organization: "Smayan Foundation & DSATM",
+      category: "hackathon",
+      period: "Apr – May 2025",
+      description: "Scored 99% in the hackathon evaluation of a 3-day Generative AI workshop and hackathon.",
+      badge: "Top Score",
+      footerLabel: "TOP SCORE",
+      credentialUrl: "https://drive.google.com/file/d/1Tf2NJJJGEYDAHVMSLjYpw-wgpY3UqkgT/view?usp=sharing"
+    },
+
+    // 2. Certifications & Industry Credentials (3 items, newest first)
+    {
+      title: "Frontend Developer (React) Certificate",
+      organization: "HackerRank",
+      category: "certification",
+      period: "May 2026",
+      description: "Demonstrated verified proficiency in React component lifecycle, state management, and modern hooks.",
+      badge: "Certified",
+      footerLabel: "CERTIFIED",
+      credentialUrl: "https://drive.google.com/file/d/18xJ3bHoli0MuHi6K9ZZpV3Ju1ihhw1w6/view?usp=drive_link"
+    },
+    {
+      title: "Honeywell Future Skills Edge: AI",
+      organization: "Honeywell & BharatCares",
+      category: "certification",
+      period: "Feb – Mar 2026",
+      description: "Comprehensive 80-hour intensive program in Artificial Intelligence and Machine Learning applications.",
+      badge: "Certified",
+      footerLabel: "CERTIFIED",
+      credentialUrl: "https://drive.google.com/file/d/1PyNAyfEWqgoVpuz4O6BKtTRyTVqky7uH/view?usp=drive_link"
+    },
+    {
+      title: "Forage Virtual Experience Programs",
+      organization: "JPMorgan Chase & Tata Group",
+      category: "certification",
+      period: "Jan 2026",
+      description: "Completed Software Engineering simulation with JPMorgan Chase and GenAI Data Analytics with Tata Group.",
+      badge: "Completed",
+      footerLabel: "COMPLETED",
+      credentialUrl: "https://drive.google.com/file/d/1pj4MXKsESxudvYYLsryROf3GcYXRB-rO/view?usp=drive_link",
+      credentialLinks: [
+        {
+          title: "JPMorgan Chase — Software Engineering",
+          url: "https://drive.google.com/file/d/1pj4MXKsESxudvYYLsryROf3GcYXRB-rO/view?usp=drive_link"
+        },
+        {
+          title: "Tata Group — GenAI Data Analytics",
+          url: "https://drive.google.com/file/d/1pZQnbzBxKUTCxVCzGuiwtYdf8UL4KQY2/view?usp=drive_link"
+        }
+      ]
     }
   ] as AchievementItem[]
 };

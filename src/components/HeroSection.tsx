@@ -64,7 +64,9 @@ export const HeroSection: React.FC = () => {
         {/* The actual profile image */}
         <img
           src={PORTFOLIO_DATA.personal.profileImage}
-          alt="Dhushanth Srinivasa"
+          alt="Dhushanth Srinivasa — AI/ML Engineer & Software Developer"
+          loading="eager"
+          decoding="async"
           className="w-full h-full object-cover object-top select-none"
           style={{
             maskImage:
@@ -73,7 +75,7 @@ export const HeroSection: React.FC = () => {
               'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.3) 15%, rgba(0,0,0,0.9) 40%, black 60%), linear-gradient(to top, transparent 0%, rgba(0,0,0,0.5) 12%, black 30%)',
             maskComposite: 'intersect',
             WebkitMaskComposite: 'destination-in',
-            filter: 'contrast(1.1) brightness(0.85)',
+            filter: 'contrast(1.05) brightness(0.95)',
           }}
           draggable={false}
         />
@@ -92,29 +94,26 @@ export const HeroSection: React.FC = () => {
       </div>
 
       {/* ═══════════════════════════════════════════════════════════
-          PARALLAX LAYER 2 — Glass Shard Panels & Lines (medium-fast)
+          PARALLAX LAYER 2 — Geometric Tech Lines & Accent Glass
+          (Face area masked to soften line intensity & glass removed from face)
           ═══════════════════════════════════════════════════════════ */}
       <div
         className="absolute inset-0 pointer-events-none will-change-transform hidden sm:block"
         style={{
           transform: `translateY(${shardTranslateY}px)`,
           opacity: imageOpacity,
+          maskImage:
+            'radial-gradient(ellipse 260px 300px at 74% 36%, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.25) 45%, rgba(0,0,0,1) 80%)',
+          WebkitMaskImage:
+            'radial-gradient(ellipse 260px 300px at 74% 36%, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.25) 45%, rgba(0,0,0,1) 80%)',
         }}
       >
-        {/* Glass Shard Panel 1 — upper diagonal */}
+        {/* Ambient Glass Shard Panel — lower accent (kept away from face) */}
         <div
-          className="absolute top-[8%] right-[5%] w-[380px] h-[260px] origin-center"
-          style={{ transform: 'rotate(-18deg)' }}
-        >
-          <div className="w-full h-full bg-gradient-to-br from-cyan-400/[0.04] via-transparent to-violet-500/[0.03] border border-cyan-400/[0.12] backdrop-blur-[2px] rounded-sm" />
-        </div>
-
-        {/* Glass Shard Panel 2 — lower diagonal */}
-        <div
-          className="absolute top-[45%] right-[0%] w-[320px] h-[220px] origin-center"
+          className="absolute top-[48%] right-[0%] w-[320px] h-[220px] origin-center"
           style={{ transform: 'rotate(22deg)' }}
         >
-          <div className="w-full h-full bg-gradient-to-tl from-violet-500/[0.04] via-transparent to-sky-400/[0.02] border border-violet-400/[0.1] backdrop-blur-[1px] rounded-sm" />
+          <div className="w-full h-full bg-gradient-to-tl from-violet-500/[0.04] via-transparent to-sky-400/[0.02] border border-violet-400/[0.08] backdrop-blur-[1px] rounded-sm" />
         </div>
 
         {/* Thin Glass Line 1 */}
@@ -160,14 +159,18 @@ export const HeroSection: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-28 pb-32 lg:pt-32">
           <div className="max-w-xl lg:max-w-2xl">
 
-            {/* Role Badge */}
-            <div className="flex items-center gap-2 mb-6">
-              <span className="font-mono text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-cyan-400">
-                CS & Design Engineer
+            {/* Role / Academic Line */}
+            <div className="flex items-center gap-2 mb-6 flex-wrap">
+              <span className="font-mono text-xs sm:text-sm font-semibold tracking-wider text-cyan-400">
+                B.E. CS & Design
               </span>
-              <span className="text-slate-600 font-mono">•</span>
-              <span className="font-mono text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-violet-400">
-                AI/ML Developer
+              <span className="text-slate-500 font-mono">•</span>
+              <span className="font-mono text-xs sm:text-sm font-semibold tracking-wider text-slate-300">
+                DSATM
+              </span>
+              <span className="text-slate-500 font-mono">•</span>
+              <span className="font-mono text-xs sm:text-sm font-semibold tracking-wider text-violet-400">
+                2027
               </span>
             </div>
 
@@ -181,16 +184,14 @@ export const HeroSection: React.FC = () => {
               </span>
             </h1>
 
-            {/* Subtitle */}
-            <p className="font-display text-lg sm:text-xl md:text-2xl font-semibold text-slate-200 tracking-wide mb-5">
-              SOFTWARE DEVELOPER{' '}
-              <span className="text-slate-500 font-normal">/</span>{' '}
-              <span className="text-cyan-300">AI & ML ENGINEER</span>
+            {/* Primary Title */}
+            <p className="font-display text-xl sm:text-2xl md:text-3xl font-semibold text-slate-100 tracking-wide mb-5">
+              AI/ML Engineer <span className="text-slate-400 font-normal">&</span> <span className="text-cyan-300">Software Developer</span>
             </p>
 
             {/* Bio line */}
-            <p className="text-sm sm:text-base text-slate-400 leading-relaxed max-w-lg mb-8 font-light">
-              Building intelligent software that solves real problems — from RAG knowledge platforms and multi-agent biomedical AI to production-grade full-stack systems.
+            <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-lg mb-8 font-normal">
+              Building intelligent software that solves real problems — from RAG knowledge platforms and multi-agent biomedical AI to end-to-end full-stack systems.
             </p>
 
             {/* CTA Buttons */}

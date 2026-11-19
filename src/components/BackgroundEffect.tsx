@@ -5,19 +5,34 @@ export const BackgroundEffect: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
+    // Respect user's motion preferences
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    let ticking = false;
     const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setMousePos({ x: e.clientX, y: e.clientY });
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  // Ambient floating particle matrix
+  // Ambient floating particle matrix with performance optimizations
   useEffect(() => {
+    // Check prefers-reduced-motion
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { alpha: true });
     if (!ctx) return;
 
     let animationFrameId: number;
@@ -30,16 +45,19 @@ export const BackgroundEffect: React.FC = () => {
       height = canvas.height = window.innerHeight;
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', handleResize, { passive: true });
 
-    const particleCount = Math.min(width > 768 ? 45 : 20, 50);
+    // Lower particle count on mobile / low-end devices to save GPU/CPU cycles
+    const isMobile = width < 768;
+    const particleCount = isMobile ? 18 : 36;
+
     const particles = Array.from({ length: particleCount }).map(() => ({
       x: Math.random() * width,
       y: Math.random() * height,
       size: Math.random() * 1.5 + 0.5,
-      speedX: (Math.random() - 0.5) * 0.3,
-      speedY: (Math.random() - 0.5) * 0.3,
-      opacity: Math.random() * 0.5 + 0.1,
+      speedX: (Math.random() - 0.5) * 0.25,
+      speedY: (Math.random() - 0.5) * 0.25,
+      opacity: Math.random() * 0.4 + 0.1,
     }));
 
     const render = () => {
@@ -57,8 +75,6 @@ export const BackgroundEffect: React.FC = () => {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(56, 189, 248, ${p.opacity})`;
-        ctx.shadowBlur = 8;
-        ctx.shadowColor = 'rgba(56, 189, 248, 0.4)';
         ctx.fill();
       });
 
@@ -79,23 +95,23 @@ export const BackgroundEffect: React.FC = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-[#030712] via-[#050b18] to-[#030712]" />
 
       {/* Subtle Cyber Grid */}
-      <div className="absolute inset-0 bg-cyber-grid opacity-30" />
+      <div className="absolute inset-0 bg-cyber-grid opacity-25" />
 
       {/* Cyber Dots Grid */}
-      <div className="absolute inset-0 cyber-dots-bg opacity-20" />
+      <div className="absolute inset-0 cyber-dots-bg opacity-15" />
 
       {/* Ambient Gradient Orbs */}
-      <div className="absolute top-[-10%] left-[10%] w-[500px] h-[500px] bg-electric-blue/10 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute top-[35%] right-[-10%] w-[600px] h-[600px] bg-electric-violet/10 rounded-full blur-[160px] pointer-events-none" />
-      <div className="absolute bottom-[10%] left-[20%] w-[550px] h-[550px] bg-cyan-600/10 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute top-[-10%] left-[10%] w-[450px] h-[450px] bg-electric-blue/10 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-[35%] right-[-10%] w-[500px] h-[500px] bg-electric-violet/10 rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute bottom-[10%] left-[20%] w-[450px] h-[450px] bg-cyan-600/10 rounded-full blur-[150px] pointer-events-none" />
 
-      {/* Dynamic Cursor Spotlight */}
+      {/* Dynamic Cursor Spotlight (Subtle & smooth) */}
       <div
-        className="absolute w-[600px] h-[600px] rounded-full blur-[120px] pointer-events-none transition-transform duration-100 ease-out -translate-x-1/2 -translate-y-1/2"
+        className="absolute w-[500px] h-[500px] rounded-full blur-[120px] pointer-events-none transition-transform duration-150 ease-out -translate-x-1/2 -translate-y-1/2 hidden sm:block"
         style={{
           left: `${mousePos.x}px`,
           top: `${mousePos.y}px`,
-          background: 'radial-gradient(circle, rgba(0, 240, 255, 0.08) 0%, rgba(139, 92, 246, 0.04) 50%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(0, 240, 255, 0.07) 0%, rgba(139, 92, 246, 0.03) 50%, transparent 70%)',
         }}
       />
 
