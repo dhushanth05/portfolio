@@ -40,8 +40,10 @@ export const AboutSection: React.FC = () => {
                 <img
                   src={PORTFOLIO_DATA.personal.profileImage}
                   alt="Dhushanth Srinivasa — AI/ML Engineer & Software Developer"
-                  loading="lazy"
+                  loading="eager"
                   decoding="async"
+                  width={128}
+                  height={128}
                   className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-2xl object-cover object-top border-2 border-cyan-400/50 shadow-xl"
                 />
               </div>

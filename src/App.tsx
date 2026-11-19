@@ -13,17 +13,27 @@ import { Footer } from './components/Footer';
 import { CommandPalette } from './components/CommandPalette';
 
 /** Wrapper that reveals a section when it enters the viewport */
-const RevealSection: React.FC<{ children: React.ReactNode; className?: string }> = ({
+interface RevealSectionProps {
+  children: React.ReactNode;
+  className?: string;
+  initialRevealed?: boolean;
+}
+
+const RevealSection: React.FC<RevealSectionProps> = ({
   children,
   className = '',
+  initialRevealed = false,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const [revealed, setRevealed] = useState(false);
+  const [revealed, setRevealed] = useState(initialRevealed);
 
   useEffect(() => {
+    if (initialRevealed) return;
+
     const el = ref.current;
     if (!el) return;
 
+    // Use a large rootMargin so sections are pre-revealed before entering viewport on mobile & desktop
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -31,11 +41,14 @@ const RevealSection: React.FC<{ children: React.ReactNode; className?: string }>
           observer.unobserve(el);
         }
       },
-      { threshold: 0.08 }
+      { 
+        rootMargin: '250px 0px', 
+        threshold: 0 
+      }
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, []);
+  }, [initialRevealed]);
 
   return (
     <div
@@ -75,7 +88,8 @@ export function App() {
         {/* Hero has its own parallax system — no wrapper needed */}
         <HeroSection />
 
-        <RevealSection>
+        {/* 2nd page / About Section: rendered immediately to eliminate mobile load latency */}
+        <RevealSection initialRevealed={true}>
           <AboutSection />
         </RevealSection>
 

@@ -9,6 +9,9 @@ export const BackgroundEffect: React.FC = () => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) return;
 
+    // Don't listen to mousemove on touch/mobile devices
+    if (window.innerWidth < 768) return;
+
     let ticking = false;
     const handleMouseMove = (e: MouseEvent) => {
       if (!ticking) {
@@ -101,9 +104,9 @@ export const BackgroundEffect: React.FC = () => {
       <div className="absolute inset-0 cyber-dots-bg opacity-15" />
 
       {/* Ambient Gradient Orbs */}
-      <div className="absolute top-[-10%] left-[10%] w-[450px] h-[450px] bg-electric-blue/10 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute top-[35%] right-[-10%] w-[500px] h-[500px] bg-electric-violet/10 rounded-full blur-[160px] pointer-events-none" />
-      <div className="absolute bottom-[10%] left-[20%] w-[450px] h-[450px] bg-cyan-600/10 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute top-[-10%] left-[10%] w-[300px] sm:w-[450px] h-[300px] sm:h-[450px] bg-electric-blue/10 rounded-full blur-[80px] sm:blur-[140px] pointer-events-none" />
+      <div className="absolute top-[35%] right-[-10%] w-[350px] sm:w-[500px] h-[350px] sm:h-[500px] bg-electric-violet/10 rounded-full blur-[90px] sm:blur-[160px] pointer-events-none" />
+      <div className="absolute bottom-[10%] left-[20%] w-[300px] sm:w-[450px] h-[300px] sm:h-[450px] bg-cyan-600/10 rounded-full blur-[80px] sm:blur-[150px] pointer-events-none" />
 
       {/* Dynamic Cursor Spotlight (Subtle & smooth) */}
       <div

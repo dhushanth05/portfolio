@@ -12,37 +12,46 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
   const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 20);
 
-      // Hero section view
-      if (window.scrollY < 200) {
-        setActiveSection('');
-        return;
-      }
-
-      // Check if near bottom of page -> contact
-      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100) {
-        setActiveSection('contact');
-        return;
-      }
-
-      const sections = ['about', 'skills', 'experience', 'projects', 'education', 'achievements', 'contact'];
-      let current = '';
-
-      for (const section of sections) {
-        const el = document.getElementById(section);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          // Active when section top passes upper viewport threshold and bottom is still visible
-          if (rect.top <= 200 && rect.bottom >= 150) {
-            current = section;
+          // Hero section view
+          if (window.scrollY < 200) {
+            setActiveSection('');
+            ticking = false;
+            return;
           }
-        }
-      }
 
-      if (current) {
-        setActiveSection(current);
+          // Check if near bottom of page -> contact
+          if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100) {
+            setActiveSection('contact');
+            ticking = false;
+            return;
+          }
+
+          const sections = ['about', 'skills', 'experience', 'projects', 'education', 'achievements', 'contact'];
+          let current = '';
+
+          for (const section of sections) {
+            const el = document.getElementById(section);
+            if (el) {
+              const rect = el.getBoundingClientRect();
+              // Active when section top passes upper viewport threshold and bottom is still visible
+              if (rect.top <= 200 && rect.bottom >= 150) {
+                current = section;
+              }
+            }
+          }
+
+          if (current) {
+            setActiveSection(current);
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
