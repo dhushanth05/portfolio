@@ -161,7 +161,7 @@ export const HeroSection: React.FC = () => {
         className="relative z-20 h-full sm:min-h-screen flex flex-col justify-between sm:justify-center will-change-transform"
         style={{ transform: `translateY(${textTranslateY}px)` }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex flex-col justify-between sm:justify-center sm:block pt-14 pb-[96px] sm:pt-28 sm:pb-32 lg:pt-32">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex flex-col justify-between sm:justify-center sm:block pt-14 pb-[118px] sm:pt-28 sm:pb-32 lg:pt-32">
           <div className="max-w-xl lg:max-w-2xl h-full flex flex-col justify-between sm:block">
 
             {/* TOP BLOCK: Role, Academic Line & Bold Heading (positioned in top empty space above forehead) */}
@@ -197,18 +197,18 @@ export const HeroSection: React.FC = () => {
               </p>
             </div>
 
-            {/* LOWER BLOCK: Bio line & CTA Buttons placed exactly above the stats grid (mobile only) */}
+            {/* LOWER BLOCK: Bio line & CTA Buttons moved slightly up with +1/+2 text size (mobile only) */}
             <div className="mt-auto sm:mt-0 pt-2 sm:pt-0">
               {/* Bio line */}
-              <p className="text-[11px] sm:text-base text-slate-300 leading-snug max-w-sm sm:max-w-lg mb-2 sm:mb-8 font-normal drop-shadow-[0_1px_6px_rgba(3,7,18,0.9)]">
+              <p className="text-[13px] sm:text-base text-slate-200 leading-snug sm:leading-relaxed max-w-sm sm:max-w-lg mb-2.5 sm:mb-8 font-normal drop-shadow-[0_1px_6px_rgba(3,7,18,0.9)]">
                 Building intelligent software that solves real problems — from RAG knowledge platforms and multi-agent biomedical AI to end-to-end full-stack systems.
               </p>
 
               {/* CTA Buttons */}
-              <div className="flex flex-row items-center gap-2 sm:gap-4 flex-wrap">
+              <div className="flex flex-row items-center gap-2.5 sm:gap-4 flex-wrap">
                 <a
                   href="#projects"
-                  className="group inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3.5 py-2 sm:px-7 sm:py-3.5 rounded-full font-mono text-xs sm:text-sm font-bold uppercase tracking-wider text-white bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 transition-all duration-300 shadow-[0_0_30px_-5px_rgba(0,240,255,0.5)] hover:shadow-[0_0_40px_-2px_rgba(0,240,255,0.7)] transform hover:-translate-y-0.5"
+                  className="group inline-flex items-center justify-center gap-1.5 sm:gap-2 px-4 py-2.5 sm:px-7 sm:py-3.5 rounded-full font-mono text-[13px] sm:text-sm font-bold uppercase tracking-wider text-white bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 transition-all duration-300 shadow-[0_0_30px_-5px_rgba(0,240,255,0.5)] hover:shadow-[0_0_40px_-2px_rgba(0,240,255,0.7)] transform hover:-translate-y-0.5"
                 >
                   <span>Explore My Work</span>
                   <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -216,7 +216,7 @@ export const HeroSection: React.FC = () => {
 
                 <a
                   href="#contact"
-                  className="group inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3.5 py-2 sm:px-7 sm:py-3.5 rounded-full font-mono text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-200 bg-white/[0.06] hover:bg-white/[0.12] border border-white/[0.15] hover:border-cyan-400/40 backdrop-blur-sm transition-all duration-300 transform hover:-translate-y-0.5"
+                  className="group inline-flex items-center justify-center gap-1.5 sm:gap-2 px-4 py-2.5 sm:px-7 sm:py-3.5 rounded-full font-mono text-[13px] sm:text-sm font-bold uppercase tracking-wider text-slate-200 bg-white/[0.06] hover:bg-white/[0.12] border border-white/[0.15] hover:border-cyan-400/40 backdrop-blur-sm transition-all duration-300 transform hover:-translate-y-0.5"
                 >
                   <span>Get In Touch</span>
                 </a>
@@ -251,17 +251,19 @@ export const HeroSection: React.FC = () => {
       </div>
 
       {/* ═══════════════════════════════════════════════════════════
-          SCROLL INDICATOR — subtle centered bounce (desktop only)
+          SCROLL INDICATOR — subtle centered bounce
+          Mobile: in between the 2x2 stats grid
+          Desktop (sm+): centered above stats bar
           ═══════════════════════════════════════════════════════════ */}
       <div
-        className="absolute bottom-20 sm:bottom-24 left-1/2 -translate-x-1/2 z-30 hidden sm:flex flex-col items-center gap-2"
+        className="absolute bottom-[46px] sm:bottom-24 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center pointer-events-none"
         style={{ opacity: Math.max(0, 1 - scrollY / 200) }}
       >
-        <span className="font-mono text-[10px] text-slate-500 uppercase tracking-[0.3em]">
+        <span className="font-mono text-[8px] sm:text-[10px] text-slate-400 uppercase tracking-[0.25em] sm:tracking-[0.3em] mb-0.5 sm:mb-2">
           Scroll
         </span>
-        <div className="w-5 h-9 rounded-full border border-slate-600 p-1 flex justify-center">
-          <div className="w-1.5 h-2 rounded-full bg-cyan-400 animate-bounce" />
+        <div className="w-4 h-7 sm:w-5 sm:h-9 rounded-full border border-slate-500/80 sm:border-slate-600 p-0.5 sm:p-1 flex justify-center bg-[#030712]/40 backdrop-blur-[2px]">
+          <div className="w-1 h-1.5 sm:w-1.5 sm:h-2 rounded-full bg-cyan-400 animate-bounce" />
         </div>
       </div>
     </section>
